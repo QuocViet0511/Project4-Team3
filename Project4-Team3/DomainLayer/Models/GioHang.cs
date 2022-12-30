@@ -6,7 +6,7 @@ namespace DomainLayer.Models
     {
         public int SanPhamId { get; set; }
         public int UserId { get; set; }
-        public String SoLuong { get; set; }
+        public int SoLuong { get; set; }
         public decimal? TongTien { get; set; }
         public DateTime? NgayTao { get; set; }
     }

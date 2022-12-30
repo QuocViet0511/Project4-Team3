@@ -9,7 +9,7 @@ namespace ServiceLayer.Service
     public interface IGioHangService
     {
         IEnumerable<GioHang> GetAll();
-        GioHang GetGioHang(int id);
+		GioHang GetGioHang(int id);
         void InsertGioHang(GioHang gioHang);
         void DeleteGioHang(int id);
         void UpdateGioHang(GioHang gioHang);
@@ -28,7 +28,7 @@ namespace ServiceLayer.Service
             _repository.Delete(gioHang);
         }
 
-        public IEnumerable<GioHang> GetAll()
+		public IEnumerable<GioHang> GetAll()
         {
             return _repository.GetAll();
         }
@@ -37,8 +37,8 @@ namespace ServiceLayer.Service
         {
             return _repository.Get(id);
         }
-
-        public void InsertGioHang(GioHang gioHang)
+		
+		public void InsertGioHang(GioHang gioHang)
         {
             _repository.Insert(gioHang);
         }
