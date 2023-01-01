@@ -37,6 +37,7 @@ namespace Project4_Nhom3
             services.AddTransient<IDanhMucSanPhamService, DanhMucSanPhamService>();
             services.AddTransient<IFeedbackService, FeedbackService>();
             services.AddTransient<IGioHangService, GioHangService>();
+            services.AddTransient<IGioHangDTOService, GioHangDTOService>();
             services.AddTransient<IKeySPService, KeySPService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<ISanPhamService, SanPhamService>();

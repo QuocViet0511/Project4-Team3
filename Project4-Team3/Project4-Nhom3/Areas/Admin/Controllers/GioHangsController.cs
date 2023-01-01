@@ -7,30 +7,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DomainLayer.Models;
 using RepositoryLayer;
-using ServiceLayer.Service;
 
-namespace Project4_Nhom3.Controllers
+namespace Project4_Nhom3.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class GioHangsController : Controller
     {
         private readonly DataDbContext _context;
-        private readonly IGioHangDTOService _gioHangDTOService;
 
-        public GioHangsController(DataDbContext context, IGioHangDTOService gioHangDTOService)
+        public GioHangsController(DataDbContext context)
         {
             _context = context;
-            _gioHangDTOService = gioHangDTOService;
         }
 
-        // GET: GioHangs
+        // GET: Admin/GioHangs
         public async Task<IActionResult> Index()
         {
-            var tolist = _gioHangDTOService.GetAll();
-
-            return View(tolist);
+            return View(await _context.GioHang.ToListAsync());
         }
 
-        // GET: GioHangs/Details/5
+        // GET: Admin/GioHangs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,13 +44,13 @@ namespace Project4_Nhom3.Controllers
             return View(gioHang);
         }
 
-        // GET: GioHangs/Create
+        // GET: Admin/GioHangs/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: GioHangs/Create
+        // POST: Admin/GioHangs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -70,7 +66,7 @@ namespace Project4_Nhom3.Controllers
             return View(gioHang);
         }
 
-        // GET: GioHangs/Edit/5
+        // GET: Admin/GioHangs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,7 +82,7 @@ namespace Project4_Nhom3.Controllers
             return View(gioHang);
         }
 
-        // POST: GioHangs/Edit/5
+        // POST: Admin/GioHangs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -121,7 +117,7 @@ namespace Project4_Nhom3.Controllers
             return View(gioHang);
         }
 
-        // GET: GioHangs/Delete/5
+        // GET: Admin/GioHangs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,7 +135,7 @@ namespace Project4_Nhom3.Controllers
             return View(gioHang);
         }
 
-        // POST: GioHangs/Delete/5
+        // POST: Admin/GioHangs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

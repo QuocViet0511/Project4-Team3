@@ -1,60 +1,54 @@
-﻿@model IEnumerable<DomainLayer.Models.GioHang>
+﻿@model IEnumerable<DomainLayer.DTO.GioHangDTO>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 style="text-align: center; width: 100%;">Index</h1>
+<h1 style="text-align: center; width: 100%;">Giỏ hàng</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+ 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.SanPhamId)
+                Tên sản phẩm
+            </th>
+            <th></th>
+            <th>
+                đơn giá
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserId)
+                số lượng 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SoLuong)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TongTien)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgayTao)
+                Thành tiền
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.SanPhamId)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UserId)
+                <img src="@Html.DisplayFor(modelItem => item.Image)"></img>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonGia)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SoLuong)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TongTien)
+                </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TongTien)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayTao)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
