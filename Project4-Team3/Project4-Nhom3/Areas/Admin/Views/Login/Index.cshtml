@@ -1,0 +1,42 @@
+﻿@model Project4_Nhom3.Areas.Admin.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="~/Content/Data/css/style.css">
+</head>
+<body>
+    <div class="center">
+        <h1>Login</h1>
+        <p style="color:red">@ViewBag.ErrorMessage</p>
+        <form role="form" action="~/Admin/Login/Login" method="post">
+            <fieldset>
+                <div class="txt_field">
+                    <div class="form-group">
+                        <input class="form-control" placeholder="E-mail" name="UserName" value="@Model.UserName" autofocus>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger", @style = "color: red" })
+                <div class="txt_field">
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Password" name="Password" type="password" value="@Model.Password">
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", @style = "color: red" })
+                <div class="checkbox">
+                    <label>
+                        <input name="RememberMe" type="checkbox" value="" />Remember Me
+                    </label>
+                </div>
+                <input class="btn btn-lg btn-success btn-block" type="submit" value="Login" />
+            </fieldset>
+        </form>
+    </div>
+
+</body>
+</html>
