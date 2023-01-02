@@ -77,12 +77,12 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Danh mục sản phẩm:</h6>
-                       @* @{
-                            for (int i = 0; i < dtlsp.Rows.Count; i++)
-                            {
-                                <a class="collapse-item" href="/Admin/SanPhams/ProductsbyCata/@dtlsp.Rows[i][0].ToString()">@dtlsp.Rows[i][1].ToString()</a>
-                            }
-                        }*@
+                        @* @{
+                        for (int i = 0; i < dtlsp.Rows.Count; i++)
+                        {
+                            <a class="collapse-item" href="/Admin/SanPhams/ProductsbyCata/@dtlsp.Rows[i][0].ToString()">@dtlsp.Rows[i][1].ToString()</a>
+                        }
+                    }*@
 
                         @*<a class="collapse-item" href="cards.html">Cards</a>*@
                     </div>
@@ -100,16 +100,16 @@
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Danh sách thương hiệu:</h6>
-                       @* @{
-                            for (int i = 0; i < dtTH.Rows.Count; i++)
-                            {
-                                <a class="collapse-item" href="/Admin/SanPhams/ProductsbyTH/@dtTH.Rows[i][0].ToString()">@dtTH.Rows[i][1].ToString()</a>
-                            }
+                        @* @{
+                        for (int i = 0; i < dtTH.Rows.Count; i++)
+                        {
+                            <a class="collapse-item" href="/Admin/SanPhams/ProductsbyTH/@dtTH.Rows[i][0].ToString()">@dtTH.Rows[i][1].ToString()</a>
                         }
-*@
+                    }
+                        *@
                         @*<a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>*@
+                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                    <a class="collapse-item" href="utilities-other.html">Other</a>*@
                     </div>
                 </div>
             </li>
@@ -127,7 +127,27 @@
                     <span>Danh mục sản phẩm</span>
                 </a>
             </li>
-
+            <!-- Nav Item - QLSanPham -->
+            <li class="nav-item">
+                <a class="nav-link" href="/Admin/SanPhams">
+                    <i class="far fa-list-alt"></i>
+                    <span>Sản phẩm</span>
+                </a>
+            </li>
+            <!-- Nav Item - QLKey -->
+            <li class="nav-item">
+                <a class="nav-link" href="/Admin/KeySPs">
+                    <i class="far fa-list-alt"></i>
+                    <span>Key sản phẩm</span>
+                </a>
+            </li>
+            <!-- Nav Item - QLMaGiamGia -->
+            <li class="nav-item">
+                <a class="nav-link" href="/Admin/GiamGias">
+                    <i class="far fa-list-alt"></i>
+                    <span>Mã giảm giá</span>
+                </a>
+            </li>
             <!-- Nav Item - QLTH -->
             <li class="nav-item">
                 <a class="nav-link" href="/Admin/Banners">
