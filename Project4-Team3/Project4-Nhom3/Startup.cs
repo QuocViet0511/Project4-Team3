@@ -42,6 +42,7 @@ namespace Project4_Nhom3
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<ISanPhamService, SanPhamService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IRegisterService, RegisterService>();
             services.AddDistributedMemoryCache();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project4_Nhom3.Models;
+using RepositoryLayer;
 using ServiceLayer.Service;
 
 namespace Project4_Nhom3.Controllers
@@ -7,9 +8,11 @@ namespace Project4_Nhom3.Controllers
     public class AccountController : Controller
     {
         private readonly IRegisterService _registerService;
-        public AccountController(IRegisterService registerService)
+        private readonly DataDbContext _context;
+        public AccountController(IRegisterService registerService, DataDbContext context)
         {
             _registerService = registerService;
+            _context = context;
         }
 
         [HttpGet]
