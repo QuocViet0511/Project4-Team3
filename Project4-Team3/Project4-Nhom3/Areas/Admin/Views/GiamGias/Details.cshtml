@@ -1,0 +1,55 @@
+﻿@model DomainLayer.Models.GiamGia
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<h1>Thông tin giảm giá</h1>
+
+<div>
+    <h4>GiamGia</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ThongTin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ThongTin)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhanTramGiamGia)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhanTramGiamGia)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayTao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NgayTao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NgaySua)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NgaySua)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TrangThai)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a class="btn btn-primary" href="/Admin/GiamGias">Quay lại</a>
+</div>

@@ -32,7 +32,8 @@ namespace ServiceLayer.Service
 
         public IEnumerable<SanPham> GetAll()
         {
-            return _repository.GetAll();
+            var list = _repository.GetAll(); 
+            return list;
         }
 
         public SanPham GetSanPham(int id)
