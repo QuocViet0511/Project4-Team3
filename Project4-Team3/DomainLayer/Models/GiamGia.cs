@@ -7,7 +7,7 @@ namespace DomainLayer.Models
         public string Name { get; set; }
         public string ThongTin { get; set; }
         public decimal? PhanTramGiamGia { get; set; }
-        public byte TrangThai { get; set; }
+        public bool TrangThai { get; set; }
         public DateTime? NgayTao { get; set; }
         public DateTime? NgaySua { get; set; }
     }

@@ -1,0 +1,115 @@
+﻿@model IEnumerable<RepositoryLayer.SanPhamVM>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<link href="~/Content/Data/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+<div id="content">
+
+    <!-- Topbar -->
+    @*<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <h1 class="h3 mb-2 text-gray-800" style="color:black"><b>Quản lý sản phẩm</b></h1>
+        </nav>*@
+    <!-- End of Topbar -->
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary">Danh sách sản phẩm</h4>
+                <a class="float-lg-right btn btn-primary" href="/Admin/SanPhams/Create">Thêm sản phẩm</a>
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr style="Background: #456bd9">
+
+                                <th style="color:white">
+                                    @Html.DisplayNameFor(model => model.RollNo)
+                                </th>
+                                <th style="color:white">
+                                    @Html.DisplayNameFor(model => model.TenDanhMucSanPham)
+                                </th>
+                                <th style="color:white">
+                                    @Html.DisplayNameFor(model => model.TenSanPham)
+                                </th>
+                                <th style="color:white">
+                                    @Html.DisplayNameFor(model => model.ThongTin)
+                                </th>
+                                <th style="color:white">
+                                    @Html.DisplayNameFor(model => model.Image)
+                                </th>
+                                <th style="color:white">
+                                    @Html.DisplayNameFor(model => model.GiaTien)
+                                </th>
+                                <th style="color:white">
+                                    @Html.DisplayNameFor(model => model.NgayTao)
+                                </th>
+                                <th style="color:white">
+                                    @Html.DisplayNameFor(model => model.NgaySua)
+                                </th>
+                                <th style="color:white">
+                                    @Html.DisplayNameFor(model => model.MaGiamGia)
+                                </th>
+                                <th style="color:white">
+                                    @Html.DisplayNameFor(model => model.TenKey)
+                                </th>
+                                <th style="color:white">Tuỳ chọn</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @item.RollNo
+                                </td>
+                                <td class="col-sm-3">
+                                    @item.TenDanhMucSanPham
+                                </td>
+                                <td class="col-sm-3">
+                                    @item.TenSanPham
+                                </td>
+                                <td class="col-sm-3">
+                                    @item.ThongTin
+                                </td>
+                                <td class="col-sm-3">
+                                    @item.Image
+                                </td>
+                                <td class="col-sm-3">
+                                    @item.GiaTien
+                                </td>
+                                <td class="col-sm-3">
+                                    @item.NgayTao
+                                </td>
+                                <td class="col-sm-3">
+                                    @item.NgaySua
+                                </td>
+                                <td class="col-sm-3">
+                                    @item.MaGiamGia
+                                </td>
+                                <td class="col-sm-3">
+                                    @item.TenKey
+                                </td>
+                                <td style="text-align : center">
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("Xoá", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                                </td>
+                            </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+</div>
