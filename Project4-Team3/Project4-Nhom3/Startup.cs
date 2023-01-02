@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -42,10 +43,12 @@ namespace Project4_Nhom3
             services.AddTransient<ISanPhamService, SanPhamService>();
             services.AddTransient<IUserService, UserService>();
             services.AddDistributedMemoryCache();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.Name = "Project4";
+                options.IdleTimeout = new TimeSpan(0,30,0);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });

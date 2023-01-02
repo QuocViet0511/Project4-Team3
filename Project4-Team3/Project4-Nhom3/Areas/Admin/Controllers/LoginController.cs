@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Project4_Nhom3.Areas.Admin.Models;
 using Project4_Nhom3.Common;
 using ServiceLayer.Service;
@@ -9,10 +10,12 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
     public class LoginController : Controller
     {
         private readonly IUserService _userService;
-
-        public LoginController(IUserService userService)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private ISession _session => _httpContextAccessor.HttpContext.Session;  
+        public LoginController(IUserService userService, IHttpContextAccessor httpContextAccessor)
         {
             _userService= userService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
 
@@ -36,7 +39,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                     var userSession = new UserLogin();
                     userSession.UserID = user.Id;
                     userSession.UserName = user.UserName;
-                    //Session.Add(CommonConstands.ADMIN_SESSION, userSession);
+                    _session.SetString(CommonConstands.ADMIN_SESSION, userSession.UserName);
                     return Redirect("~/Admin/Home/Index");
                 }
                 else if (result == 0)

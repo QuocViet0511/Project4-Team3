@@ -1,18 +1,5 @@
-﻿@*@using System.Data
-@using System.Data.SqlClient
-@using ShopNuocHoa.Areas.Admin.Models
-@using System.Configuration
-@{
-    SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DBContext"].ConnectionString);
-    SqlDataAdapter dalsp, daTH;
-    dalsp = new SqlDataAdapter("Select * from LoaiSP", con);
-    daTH = new SqlDataAdapter("Select * from ThuongHieu", con);
-    DataTable dtlsp, dtTH;
-    dtlsp = new DataTable();
-    dtTH = new DataTable();
-    dalsp.Fill(dtlsp);
-    daTH.Fill(dtTH);
-}*@
+﻿
+
 <html lang="en">
 
 <head>
@@ -36,7 +23,28 @@
 </head>
 
 <body id="page-top">
-
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            @if (@ViewBag.userName != null)
+            {
+                @ViewBag.userName
+                ;
+            } <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user">
+            <li>
+                <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="~/Admin/Home/Logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+            </li>
+        </ul>
+        <!-- /.dropdown-user -->
+    </li>
     <!-- Page Wrapper -->
     <div id="wrapper">
 

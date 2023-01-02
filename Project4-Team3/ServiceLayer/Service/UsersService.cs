@@ -35,14 +35,14 @@ namespace ServiceLayer.Service
             }
             else
             {
-               
-                    if (taikhoan.Password == pass)
-                        if (taikhoan.RoleId == 1)
-                            return 1;
-                        else
-                            return -1;
+
+                if (taikhoan.Password == pass)
+                    if (taikhoan.RoleId == 1)
+                        return 1;
                     else
-                        return -2;
+                        return -1;
+                else
+                    return -2;
             }
         }
 
