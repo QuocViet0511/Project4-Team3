@@ -19,7 +19,7 @@ namespace DomainLayer.DTO
 		public string Image { get; set; }
 		public string Name { get; set; }
 		public decimal? DonGia { get; set; }
-		public string SoLuong { get; set; }
+		public int SoLuong { get; set; }
 		public decimal? TongTien { get; set; }
 
 	}

@@ -11,7 +11,7 @@ using RepositoryLayer;
 namespace Project4_Nhom3.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class BannersController : Controller 
+    public class BannersController : Controller
     {
         private readonly DataDbContext _context;
 
