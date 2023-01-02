@@ -1,0 +1,78 @@
+﻿@model DomainLayer.Models.Users
+@{
+    ViewBag.Title = "Register";
+}
+<!--start-breadcrumbs-->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="breadcrumbs-main">
+            <ol class="breadcrumb">
+                <li><a href="~/Home/Index">Home</a></li>
+                <li class="active">Register</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!--end-breadcrumbs-->
+<!--register-starts-->
+<div class="register">
+    <div class="container">
+        <form method="post" action="~/Account/Register">
+            @Html.AntiForgeryToken()
+            @if (ViewData["SuccessMsg"] != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    <strong>Chúc mừng bạn!</strong> đã đăng ký thành công.
+                    <br />Vui lòng click <a href="~/dang-nhap">vào đây</a> để đăng nhập.
+                </div>
+            }
+            <div class="register-top heading">
+                <h2>REGISTER</h2>
+            </div>
+            <div class="register-main">
+                <div style="position: relative; padding-right: 15px; padding-left: 15px">
+                    <p style="color:#f00">
+                        @ViewBag.MessageRegister
+                    </p>
+                </div>
+                <div class="col-md-6 account-left">
+                    <input name="UserName" placeholder="Username" type="text" tabindex="5" required value="@Model.UserName" />
+                    <input name="Email" placeholder="Email address" type="text" tabindex="8" required value="@Model.Email">
+                    <input name="Phone" placeholder="Mobile" type="text" tabindex="9" required value="@Model.Phone">
+                </div>
+                <div class="col-md-6 account-left">
+                    <input id="inPassWord" name="Password" placeholder="Password" type="password" tabindex="11">
+                    <input id="rePassWord" name="ResetPassword" placeholder="Retype password" type="password" tabindex="12">
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger col-md-6 account-left", @style = "color: red" })
+                    <br />
+                    <span id="LoiPassWord" style="color: red; font-family: 'Lato-Regular'"></span>
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger", @style = "color: red" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", @style = "color: red" })
+                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger", @style = "color: red" })
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="address submit">
+                <input id="btnSubmit" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>
+<!--register-end-->
+@*Script kiểm tra ô nhập lại mật khẩu phải trùng với ô trên*@
+<script type="text/javascript">
+    $('#btnSubmit').click(function () {
+        var loi = 0;
+        if ($('#inPassWord').val() != $('#rePassWord').val()) {
+            $('#LoiPassWord').text('Mật khẩu không khớp nhau !');
+            loi++;
+        }
+        else {
+            $('#LoiPassWord').text('');
+        }
+        if (loi != 0) {
+            return false;
+        }
+        return true;
+    });
+</script>

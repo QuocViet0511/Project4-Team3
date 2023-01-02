@@ -32,7 +32,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             ViewBag.ErrorMessage = "";
             if (ModelState.IsValid)
             {
-                var result = _userService.Login(loginViewModel.UserName,loginViewModel.Password);
+                var result = _userService.LoginAdmin(loginViewModel.UserName,loginViewModel.Password);
                 if (result == 1)
                 {
                     var user = _userService.GetUserByName(loginViewModel.UserName);

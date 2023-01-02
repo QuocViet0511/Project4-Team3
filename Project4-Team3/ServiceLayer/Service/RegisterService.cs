@@ -1,5 +1,5 @@
 ﻿using DomainLayer.Models;
-using Project4_Nhom3.Models;
+using DomainLayer.ViewModal;
 using RepositoryLayer;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace ServiceLayer.Service
         bool isExistAccount(string account);
 
         bool isValidPassword(string password);
-        void RegisterAccount(RegisterViewModal register);
+        void RegisterAccount(Users register);
     }
     public class RegisterService : IRegisterService
     {
@@ -42,15 +42,16 @@ namespace ServiceLayer.Service
             return Regex.IsMatch(password, @"\w");
         }
 
-        public void RegisterAccount(RegisterViewModal register)
+        public void RegisterAccount(Users register)
         {
-            var dangKy = new RegisterViewModal
+            var dangKy = new Users
             {
                 UserName = register.UserName,
                 Password = register.Password,
-                CreatedDate = DateTime.Now,
+                NgayTao = DateTime.Now,
                 Email = register.Email,
                 Phone = register.Phone,
+                RoleId = 2,
             };
             _context.Add(dangKy);
             _context.SaveChanges();

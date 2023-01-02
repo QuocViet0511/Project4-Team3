@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System;
 
-namespace Project4_Nhom3.Models
+namespace DomainLayer.ViewModal
 {
     public class RegisterViewModal
     {
