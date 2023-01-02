@@ -26,7 +26,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.TenDanhMucSanPham, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TenDanhMucSanPham, new { htmlAttributes = new { @class = "form-control" } }) @*list danh sach*@
+                        @Html.DropDownListFor(model => model.DanhMucSanPhamId,ViewBag.DMSP as SelectList,  new { @class = "form-control" } )
                     </div>
                 </div>
                 <div class="form-group">
@@ -53,7 +53,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.GiaTien, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.GiaTien, new { htmlAttributes = new { @class = "form-control" } })  @*number gia tien*@
+                        @Html.EditorFor(model => model.GiaTien, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "0.01", @value = "0"  } }) 
                         @Html.ValidationMessageFor(model => model.GiaTien, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -68,16 +68,15 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.MaGiamGia, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.MaGiamGia, new { htmlAttributes = new { @class = "form-control" } }) @*list danh sach*@
+                        @Html.DropDownListFor(model => model.GiamGiaId,ViewBag.GG as SelectList,  new { @class = "form-control" } )
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.TenKey, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TenKey, new { htmlAttributes = new { @class = "form-control" } }) @*list danh sach*@
+                        @Html.DropDownListFor(model => model.KeySPId,ViewBag.KeySP as SelectList,  new { @class = "form-control" } )
                     </div>
                 </div>
-
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Save" class="btn btn-success" />

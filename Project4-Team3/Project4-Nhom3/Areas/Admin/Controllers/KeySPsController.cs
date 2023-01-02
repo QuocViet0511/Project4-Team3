@@ -21,7 +21,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/KeySPs
-        [HttpGet]
+        [HttpGet("Admin/KeySPs")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.KeySP.ToListAsync());
@@ -63,7 +63,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             {
                 _context.Add(keySP);
                 await _context.SaveChangesAsync();
-                return Redirect("~/Admin/KeySPs/Index");
+                return Redirect("~/Admin/KeySPs");
             }
             return View(keySP);
         }
@@ -113,7 +113,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return Redirect("~/Admin/KeySPs/Index");
+                return Redirect("~/Admin/KeySPs");
             }
             return View(keySP);
         }
@@ -133,8 +133,9 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
-            return View(keySP);
+            _context.KeySP.Remove(keySP);
+            await _context.SaveChangesAsync();
+            return Redirect("~/Admin/KeySPs");
         }
 
         // POST: Admin/KeySPs/Delete/5
@@ -145,7 +146,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             var keySP = await _context.KeySP.FindAsync(id);
             _context.KeySP.Remove(keySP);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Redirect("~/Admin/KeySPs");
         }
 
         private bool KeySPExists(int id)

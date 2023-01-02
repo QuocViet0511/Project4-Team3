@@ -64,7 +64,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             {
                 _context.Add(giamGia);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Redirect("~/Admin/GiamGias");
             }
             return View(giamGia);
         }
@@ -116,7 +116,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Redirect("~/Admin/GiamGias");
             }
             return View(giamGia);
         }
@@ -148,7 +148,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             var giamGia = await _context.GiamGia.FindAsync(id);
             _context.GiamGia.Remove(giamGia);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Redirect("~/Admin/GiamGias");
         }
 
         private bool GiamGiaExists(int id)
