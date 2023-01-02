@@ -12,7 +12,8 @@ namespace ServiceLayer.Service
         void InsertUser(Users user);
         void DeleteUser(int id);
         void UpdateUser(Users user);
-        int Login(string name, string pass);
+        int LoginAdmin(string name, string pass);
+        int LoginUser(string name, string pass);
         Users GetUserByName(string name);
     }
     public class UserService : IUserService
@@ -26,7 +27,7 @@ namespace ServiceLayer.Service
             _context = context;
         }
 
-        public int Login(string name, string pass)
+        public int LoginAdmin(string name, string pass)
         {
             var taikhoan = _context.Users.SingleOrDefault(x => x.UserName == name);
             if (taikhoan == null)
@@ -35,17 +36,32 @@ namespace ServiceLayer.Service
             }
             else
             {
-               
-                    if (taikhoan.Password == pass)
-                        if (taikhoan.RoleId == 1)
-                            return 1;
-                        else
-                            return -1;
+
+                if (taikhoan.Password == pass)
+                    if (taikhoan.RoleId == 1)
+                        return 1;
+                    else
+                        return -1;
+                else
+                    return -2;
+            }
+        }
+        public int LoginUser(string userName, string passWord)
+        {
+            var user = _context.Users.SingleOrDefault(n => n.UserName == userName);
+            if (user == null)
+            {
+                return 0;
+            }
+            else
+            {
+                
+                    if (user.Password == passWord)
+                        return 1;
                     else
                         return -2;
             }
         }
-
         public Users GetUserByName(string Name)
         {
             return _context.Users.SingleOrDefault(x => x.UserName == Name);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using DomainLayer.Models;
 
+
 namespace RepositoryLayer
 {
     public class DataDbContext : DbContext
@@ -21,7 +22,6 @@ namespace RepositoryLayer
         public virtual DbSet<BinhLuan> BinhLuan { get; set; }
         public virtual DbSet<Banner> Banner { get; set; }
         public virtual DbSet<BaiViet> BaiViet { get; set; }
-
 
     }
 }
