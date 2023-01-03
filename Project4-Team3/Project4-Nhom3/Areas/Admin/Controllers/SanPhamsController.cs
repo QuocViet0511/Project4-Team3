@@ -149,9 +149,9 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             var listDMSP = _context.DanhMucSanPham.AsEnumerable().ToList();
             var listGiamGia = _context.GiamGia.AsEnumerable().ToList();
             var listKeySP = _context.KeySP.AsEnumerable().ToList();
-            ViewBag.DMSP = new SelectList(listDMSP, "Id", "TenDanhMuc");
-            ViewBag.GG = new SelectList(listGiamGia, "Id", "Name");
-            ViewBag.KeySP = new SelectList(listKeySP, "Id", "KeyName");
+            ViewBag.DMSP = new SelectList(listDMSP, "Id", "TenDanhMuc",sanPham.DanhMucSanPhamId);
+            ViewBag.GG = new SelectList(listGiamGia, "Id", "Name", sanPham.GiamGiaId);
+            ViewBag.KeySP = new SelectList(listKeySP, "Id", "KeyName", sanPham.KeySPId);
             if (sanPham == null)
             {
                 return NotFound();
