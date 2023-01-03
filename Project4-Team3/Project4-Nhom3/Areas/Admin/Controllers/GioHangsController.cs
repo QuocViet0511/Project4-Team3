@@ -27,7 +27,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/GioHangs/Details/5
-        [Route("Detail/{id}")]
+        [Route("Admin/GioHangs/Detail/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -68,7 +68,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/GioHangs/Edit/5
-        [Route("Edit/{id}")]
+        [Route("Admin/GioHangs/Edit/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -120,7 +120,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/GioHangs/Delete/5
-        [Route("Delete/{id}")]
+        [Route("Admin/GioHangs/Delete/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

@@ -68,7 +68,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/DanhMucSanPhams/Edit/5
-        [Route("Edit/{id}")]
+        [Route("Admin/DanhMucSanPhams/Edit/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -120,7 +120,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/DanhMucSanPhams/Delete/5
-        [Route("Delete/{id}")]
+        [Route("Admin/DanhMucSanPhams/Delete/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
