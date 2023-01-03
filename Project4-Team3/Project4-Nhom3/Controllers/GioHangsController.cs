@@ -25,9 +25,7 @@ namespace Project4_Nhom3.Controllers
         // GET: GioHangs
         public async Task<IActionResult> Index()
         {
-            var tolist = _gioHangDTOService.GetAll();
-
-            return View(tolist);
+            return View(_gioHangDTOService.GetAll());
         }
 
         // GET: GioHangs/Details/5

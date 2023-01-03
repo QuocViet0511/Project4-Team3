@@ -89,7 +89,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TenDanhMuc,ThongTin,NgayTao,NgaySua,Id")] DanhMucSanPham danhMucSanPham)
+        public async Task<IActionResult> Edit(int id,DanhMucSanPham danhMucSanPham)
         {
             if (id != danhMucSanPham.Id)
             {

@@ -36,11 +36,11 @@
 			{
                 <tr style="font-weight: bold;">
 					<td>
-                        <img src="@Html.DisplayFor(modelItem => item.Image)" width="80px"></img>
-                        @Html.DisplayFor(modelItem => item.Name)
+                        <img src="@Html.DisplayFor(modelItem => item.sanPham.Image)" width="80px"></img>
+                        @Html.DisplayFor(modelItem => item.sanPham.TenSanPham)
 					</td>
                     <td >
-						@Html.DisplayFor(modelItem => item.DonGia)
+                        @Html.DisplayFor(modelItem => item.sanPham.GiaTien)
 					</td>
                     <td >
                         <input type="number" value="@Html.DisplayFor(modelItem => item.SoLuong)">

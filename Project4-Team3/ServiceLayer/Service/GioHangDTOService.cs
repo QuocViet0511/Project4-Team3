@@ -21,37 +21,26 @@ namespace ServiceLayer.Service
     public class GioHangDTOService : IGioHangDTOService
     {
         private readonly DataDbContext _context;
-        /*public readonly DbSet<GioHang> _gioHang;
-        public readonly DbSet<SanPham> _sanPham;*/
         public GioHangDTOService(DataDbContext context)
         {
             _context = context;
-            /*_gioHang = context.Set<GioHang>();
-            _sanPham = context.Set<SanPham>();*/
         }
 
         public IEnumerable<GioHangDTO> GetAll()
         {
-            try
-            {
                 var list = (from GioHang in _context.GioHang
                             join SanPham in _context.SanPham on GioHang.SanPhamId equals SanPham.Id
+                            join Users in _context.Users on GioHang.UserId equals Users.Id
                             select new GioHangDTO
                             {
                                 Id = GioHang.Id,
-                                Image = SanPham.Image,
-                                Name = SanPham.TenSanPham,
-                                DonGia = SanPham.GiaTien,
                                 SoLuong = GioHang.SoLuong,
-                                TongTien = GioHang.TongTien
+                                TongTien = GioHang.TongTien,
+                                NgayTao = Users.NgayTao,
+                                sanPham = SanPham,
+                                user = Users
                             }).ToList();
                 return list;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
         }
     }
 }
