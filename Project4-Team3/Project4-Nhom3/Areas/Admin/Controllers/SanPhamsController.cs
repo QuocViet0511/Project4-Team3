@@ -146,6 +146,12 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             sanPhamVM.listGiamGia = _context.GiamGia.Where(x => x.Id == sanPham.GiamGiaId).ToList();
             sanPhamVM.listKeySP = _context.KeySP.Where(x => x.Id == sanPham.KeySPId).ToList();
 
+            var listDMSP = _context.DanhMucSanPham.AsEnumerable().ToList();
+            var listGiamGia = _context.GiamGia.AsEnumerable().ToList();
+            var listKeySP = _context.KeySP.AsEnumerable().ToList();
+            ViewBag.DMSP = new SelectList(listDMSP, "Id", "TenDanhMuc");
+            ViewBag.GG = new SelectList(listGiamGia, "Id", "Name");
+            ViewBag.KeySP = new SelectList(listKeySP, "Id", "KeyName");
             if (sanPham == null)
             {
                 return NotFound();
@@ -154,8 +160,6 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // POST: Admin/SanPhams/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, SanPhamVM sanPhamVM)
