@@ -8,9 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using DomainLayer.Models;
 using RepositoryLayer;
 
-namespace Project4_Nhom3.Areas.Admin.Controllers
+namespace Project4_Nhom3.Admin.Controllers
 {
-    [Area("Admin")]
     public class BannersController : Controller
     {
         private readonly DataDbContext _context;
@@ -27,7 +26,6 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/Banners/Details/5
-        [Route("Banner/Detail/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,7 +44,6 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/Banners/Create
-        [Route("Banner/Create")]
         public IActionResult Create()
         {
             return View();
@@ -69,7 +66,6 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/Banners/Edit/5
-        [Route("Banner/Edit/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -121,7 +117,6 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/Banners/Delete/5
-        [Route("Banner/Delete/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -147,7 +142,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             var banner = await _context.Banner.FindAsync(id);
             _context.Banner.Remove(banner);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         private bool BannerExists(int id)
