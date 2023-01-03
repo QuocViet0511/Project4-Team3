@@ -91,7 +91,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,ThongTin,PhanTramGiamGia,TrangThai,NgayTao,NgaySua,Id")] GiamGia giamGia)
+        public async Task<IActionResult> Edit(int id, GiamGia giamGia)
         {
             if (id != giamGia.Id)
             {

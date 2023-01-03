@@ -27,7 +27,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/DanhMucSanPhams/Details/5
-        [Route("Detail/{id}")]
+        [Route("Admin/DanhMucSanPhams/Detail/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -56,7 +56,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TenDanhMuc,ThongTin,NgayTao,NgaySua,Id")] DanhMucSanPham danhMucSanPham)
+        public async Task<IActionResult> Create(DanhMucSanPham danhMucSanPham)
         {
             if (ModelState.IsValid)
             {
@@ -114,7 +114,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Redirect("~/Admin/DanhMucSanPhams");
             }
             return View(danhMucSanPham);
         }
