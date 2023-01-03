@@ -6,7 +6,18 @@
 }
 
 <link href="~/Content/Data/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+<style>
+    .text-overflow {
+    width: auto;
+    height: 75px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 25px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    max-width: 100% !important;
+}
+</style>
 <div id="content">
 
     <!-- Topbar -->
@@ -30,56 +41,38 @@
                         <thead>
                             <tr style="Background: #456bd9">
                                 <th style="color:white">
-                                    @Html.DisplayNameFor(model => model.TenDanhMuc)
+                                    Tên danh mục
                                 </th>
 
                                 <th style="color:white">
-                                    @Html.DisplayNameFor(model => model.ThongTin)
+                                    Thông tin
                                 </th>
                                 <th style="color:white">
-                                    @Html.DisplayNameFor(model => model.NgayTao)
+                                    Ngày tạo
                                 </th>
                                 <th style="color:white">
-                                    @Html.DisplayNameFor(model => model.NgaySua)
+                                    Ngày Sửa
                                 </th>
                                 <th style="color:white">Tuỳ chọn</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TenDanhMuc)
-                                </th>
-
-                                <th>
-                                    @Html.DisplayNameFor(model => model.ThongTin)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.NgayTao)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.NgaySua)
-                                </th>
-                                <th></th>
-                            </tr>
-                        </tfoot>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>
+                                    <td class="col-sm-2">
                                         @item.TenDanhMuc
                                     </td>
-                                    <td class="col-sm-3">
+                                    <td class="col-sm-3 text-overflow">
                                         @item.ThongTin
                                     </td>
-                                    <td class="col-sm-3">
+                                    <td class="col-sm-2">
                                         @item.NgayTao
                                     </td>
-                                     <td class="col-sm-3">
+                                    <td class="col-sm-2">
                                         @item.NgaySua
                                     </td>
-                                    <td style="text-align : center">
+                                    <td class="col-sm-2"  style="text-align : center">
                                         @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
                                         @Html.ActionLink("Xoá", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
                                     </td>

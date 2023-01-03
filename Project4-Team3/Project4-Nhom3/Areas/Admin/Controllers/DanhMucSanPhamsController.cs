@@ -21,6 +21,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/DanhMucSanPhams
+        [Route("Admin/DanhMucSanPhams")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.DanhMucSanPham.ToListAsync());
@@ -60,6 +61,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                danhMucSanPham.SetNgayTao();
                 _context.Add(danhMucSanPham);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -100,6 +102,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             {
                 try
                 {
+                    danhMucSanPham.SetNgaySua();
                     _context.Update(danhMucSanPham);
                     await _context.SaveChangesAsync();
                 }

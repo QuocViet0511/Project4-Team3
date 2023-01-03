@@ -79,7 +79,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            var gioHang = _gioHangDTOService.GetGioHang(id);
+            var gioHang = _gioHangDTOService.GetGioHangDTO(id);
             if (gioHang == null)
             {
                 return NotFound();
@@ -92,21 +92,18 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, GioHangDTO _gioHang)
+        public async Task<IActionResult> Edit(int id, GioHangDTO gioHang)
         {
-            if (id != _gioHang.Id)
+            if (id != gioHang.Id)
             {
                 return NotFound();
             }
-
-            GioHang gioHang = new GioHang(_gioHang);
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(gioHang);
-                    await _context.SaveChangesAsync();
+                    _gioHangDTOService.UpdateGioHangDTO(gioHang);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
