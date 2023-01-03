@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DomainLayer.Models;
 using RepositoryLayer;
+using ServiceLayer.Service;
+using DomainLayer.DTO;
 
 namespace Project4_Nhom3.Areas.Admin.Controllers
 {
@@ -14,10 +16,12 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
     public class GioHangsController : Controller
     {
         private readonly DataDbContext _context;
+        private readonly IGioHangDTOService _gioHangDTOService;
 
-        public GioHangsController(DataDbContext context)
+        public GioHangsController(DataDbContext context, IGioHangDTOService gioHangDTOService)
         {
             _context = context;
+            _gioHangDTOService = gioHangDTOService;
         }
 
         // GET: Admin/GioHangs
@@ -68,15 +72,14 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/GioHangs/Edit/5
-        [Route("Admin/GioHangs/Edit/{id}")]
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet("Admin/GioHangs/Edit/{id}")]
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var gioHang = await _context.GioHang.FindAsync(id);
+            var gioHang = _gioHangDTOService.GetGioHang(id);
             if (gioHang == null)
             {
                 return NotFound();
@@ -89,12 +92,14 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SanPhamId,UserId,SoLuong,TongTien,NgayTao,Id")] GioHang gioHang)
+        public async Task<IActionResult> Edit(int id, GioHangDTO _gioHang)
         {
-            if (id != gioHang.Id)
+            if (id != _gioHang.Id)
             {
                 return NotFound();
             }
+
+            GioHang gioHang = new GioHang(_gioHang);
 
             if (ModelState.IsValid)
             {

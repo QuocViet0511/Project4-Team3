@@ -13,8 +13,8 @@ namespace ServiceLayer.Service
     public interface IGioHangDTOService
     {
         IEnumerable<GioHangDTO> GetAll();
-        /*GioHang GetGioHang(int id);
-        void InsertGioHang(GioHang gioHang);
+        GioHangDTO GetGioHang(int? id);
+        /*void InsertGioHang(GioHang gioHang);
         void DeleteGioHang(int id);
         void UpdateGioHang(GioHang gioHang);*/
     }
@@ -35,12 +35,29 @@ namespace ServiceLayer.Service
                             {
                                 Id = GioHang.Id,
                                 SoLuong = GioHang.SoLuong,
-                                TongTien = GioHang.TongTien,
                                 NgayTao = Users.NgayTao,
                                 sanPham = SanPham,
                                 user = Users
                             }).ToList();
                 return list;
         }
+
+        public GioHangDTO GetGioHang(int? id)
+        {
+            var gioHang = (from GioHang in _context.GioHang where GioHang.Id == id
+                        join SanPham in _context.SanPham on GioHang.SanPhamId equals SanPham.Id
+                        join Users in _context.Users on GioHang.UserId equals Users.Id
+                        select new GioHangDTO
+                        {
+                            Id = GioHang.Id,
+                            SoLuong = GioHang.SoLuong,
+                            NgayTao = Users.NgayTao,
+                            sanPham = SanPham,
+                            user = Users
+                        }).First();
+            return gioHang;
+        }
+
+ 
     }
 }
