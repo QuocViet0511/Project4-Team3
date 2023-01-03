@@ -57,7 +57,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("KeyName,KeyInfo,NgayTao,TrangThaiKey,Id")] KeySP keySP)
+        public async Task<IActionResult> Create(KeySP keySP)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         // POST: Admin/KeySPs/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("KeyName,KeyInfo,NgayTao,TrangThaiKey,Id")] KeySP keySP)
+        public async Task<IActionResult> Edit(int id, KeySP keySP)
         {
             if (id != keySP.Id)
             {
