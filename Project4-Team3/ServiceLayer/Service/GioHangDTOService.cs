@@ -36,7 +36,8 @@ namespace ServiceLayer.Service
                                 Id = GioHang.Id,
                                 SoLuong = GioHang.SoLuong,
                                 NgayTao = Users.NgayTao,
-                                sanPham = SanPham,
+                                TongTien = GioHang.TongTien,
+								sanPham = SanPham,
                                 user = Users
                             }).ToList();
                 return list;

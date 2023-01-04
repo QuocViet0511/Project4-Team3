@@ -7,5 +7,5 @@ namespace DomainLayer.DTO
 	{
         public SanPham sanPham { get; set; }
 		public Users user { get; set; }
-     }
+    }
 }

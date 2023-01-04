@@ -10,5 +10,9 @@ namespace DomainLayer.Models
         public int SoLuong { get; set; }
         public decimal? TongTien { get; set; }
         public DateTime? NgayTao { get; set; }
-    }
+		public void SetNgayTao()
+		{
+			this.NgayTao = DateTime.Now;
+		}
+	}
 }

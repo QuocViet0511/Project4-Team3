@@ -56,6 +56,7 @@ namespace RepositoryLayer
             {
                 throw new ArgumentNullException("entity");
             }
+            _context.Update(entity);
             _context.SaveChanges();
         }
         public void SaveChange()

@@ -16,18 +16,19 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
     public class GioHangsController : Controller
     {
         private readonly DataDbContext _context;
-        private readonly IGioHangDTOService _gioHangDTOService;
+        private readonly IGioHangService _gioHangService;
 
-        public GioHangsController(DataDbContext context, IGioHangDTOService gioHangDTOService)
+        public GioHangsController(DataDbContext context, IGioHangService gioHangService)
         {
             _context = context;
-            _gioHangDTOService = gioHangDTOService;
+            _gioHangService = gioHangService;
         }
 
         // GET: Admin/GioHangs
+        [Route("Admin/GioHangs")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.GioHang.ToListAsync());
+            return View(_gioHangService.GetAll());
         }
 
         // GET: Admin/GioHangs/Details/5
@@ -60,12 +61,12 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SanPhamId,UserId,SoLuong,TongTien,NgayTao,Id")] GioHang gioHang)
+        public async Task<IActionResult> Create(GioHang gioHang)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(gioHang);
-                await _context.SaveChangesAsync();
+                gioHang.SetNgayTao();
+				_gioHangService.InsertGioHang(gioHang);
                 return RedirectToAction(nameof(Index));
             }
             return View(gioHang);
@@ -79,7 +80,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            var gioHang = _gioHangDTOService.GetGioHangDTO(id);
+            var gioHang = _gioHangService.GetGioHang(id);
             if (gioHang == null)
             {
                 return NotFound();
@@ -92,7 +93,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, GioHangDTO gioHang)
+        public async Task<IActionResult> Edit(int id, GioHang gioHang)
         {
             if (id != gioHang.Id)
             {
@@ -103,7 +104,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             {
                 try
                 {
-                    _gioHangDTOService.UpdateGioHangDTO(gioHang);
+                    _gioHangService.UpdateGioHang(gioHang);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -116,7 +117,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Redirect("~/Admin/GioHangs");
             }
             return View(gioHang);
         }
