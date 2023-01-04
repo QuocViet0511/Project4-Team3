@@ -16,6 +16,7 @@
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
+                <br />
                 <div class="form-group">
                     @Html.LabelFor(model => model.RollNo, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -26,7 +27,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.TenDanhMucSanPham, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.DanhMucSanPhamId,ViewBag.DMSP as SelectList,  new { @class = "form-control" } )
+                            @Html.DropDownListFor(model => model.DanhMucSanPhamId,ViewBag.DMSP as SelectList, "Lựa chọn danh mục sản phẩm",  new { @class = "form-control" } )
                     </div>
 
                 </div>
@@ -47,8 +48,8 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                        @*<input asp-for="ImageURL" type="file">*@
+                        @Html.EditorFor(model=>model.Image, new { htmlAttributes = new { @type = "file" } })
                     </div>
                 </div>
                 <div class="form-group">
@@ -69,13 +70,13 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.MaGiamGia, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                       @Html.DropDownListFor(model => model.GiamGiaId,ViewBag.GG as SelectList,  new { @class = "form-control" } )
+                       @Html.DropDownListFor(model => model.GiamGiaId,ViewBag.GG as SelectList, "Lựa chọn Mã giảm giá", new { @class = "form-control" } )
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.TenKey, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.KeySPId,ViewBag.KeySP as SelectList,  new { @class = "form-control" } )
+                        @Html.DropDownListFor(model => model.KeySPId,ViewBag.KeySP as SelectList, "Lựa chọn Key",  new { @class = "form-control" } )
                     </div>
                 </div>
 

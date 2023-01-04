@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using DomainLayer.Models;
 using RepositoryLayer;
 using ServiceLayer.Service;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace Project4_Nhom3.Areas.Admin.Controllers
 {
@@ -15,10 +18,12 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
     public class SanPhamsController : Controller
     {
         private readonly DataDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public SanPhamsController(DataDbContext context)
+        public SanPhamsController(DataDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Admin/SanPhams
@@ -86,15 +91,15 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // POST: Admin/SanPhams/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(SanPhamVM sanPhamVM)
+        public async Task<IActionResult> Create(SanPhamVM sanPhamVM, IFormFile ImageURL)
         {
-
+            sanPhamVM.ImageURL = ImageURL;
+            var stringImage = Uploadfile(sanPhamVM);
             if (ModelState.IsValid)
             {
+
                 SanPham sanPham = new SanPham()
                 {
                     Id = sanPhamVM.Id,
@@ -102,7 +107,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                     GiamGiaId = sanPhamVM.GiamGiaId,
                     KeySPId = sanPhamVM.KeySPId,
                     GiaTien = sanPhamVM.GiaTien,
-                    Image = sanPhamVM.Image,
+                    Image = stringImage,
                     NgayTao = sanPhamVM.NgayTao,
                     NgaySua = sanPhamVM.NgaySua,
                     RollNo = sanPhamVM.RollNo,
@@ -142,14 +147,14 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             sanPhamVM.NgayTao = sanPham.NgayTao;
             sanPhamVM.NgaySua = sanPham.NgaySua;
             sanPhamVM.RollNo = sanPham.RollNo;
-            sanPhamVM.listDMSP = _context.DanhMucSanPham.Where(x=>x.Id == sanPham.DanhMucSanPhamId).ToList();
+            sanPhamVM.listDMSP = _context.DanhMucSanPham.Where(x => x.Id == sanPham.DanhMucSanPhamId).ToList();
             sanPhamVM.listGiamGia = _context.GiamGia.Where(x => x.Id == sanPham.GiamGiaId).ToList();
             sanPhamVM.listKeySP = _context.KeySP.Where(x => x.Id == sanPham.KeySPId).ToList();
 
             var listDMSP = _context.DanhMucSanPham.AsEnumerable().ToList();
             var listGiamGia = _context.GiamGia.AsEnumerable().ToList();
             var listKeySP = _context.KeySP.AsEnumerable().ToList();
-            ViewBag.DMSP = new SelectList(listDMSP, "Id", "TenDanhMuc",sanPham.DanhMucSanPhamId);
+            ViewBag.DMSP = new SelectList(listDMSP, "Id", "TenDanhMuc", sanPham.DanhMucSanPhamId);
             ViewBag.GG = new SelectList(listGiamGia, "Id", "Name", sanPham.GiamGiaId);
             ViewBag.KeySP = new SelectList(listKeySP, "Id", "KeyName", sanPham.KeySPId);
             if (sanPham == null)
@@ -171,6 +176,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
+                var stringImage = Uploadfile(sanPhamVM);
                 try
                 {
                     SanPham sanPham = _context.SanPham.FirstOrDefault(x => x.Id == id);
@@ -179,7 +185,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                     sanPham.GiamGiaId = sanPhamVM.GiamGiaId;
                     sanPham.KeySPId = sanPhamVM.KeySPId;
                     sanPham.GiaTien = sanPhamVM.GiaTien;
-                    sanPham.Image = sanPhamVM.Image;
+                    sanPham.Image = stringImage;
                     sanPham.NgayTao = sanPhamVM.NgayTao;
                     sanPham.NgaySua = sanPhamVM.NgaySua;
                     sanPham.RollNo = sanPhamVM.RollNo;
@@ -214,18 +220,35 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var sanPham = await _context.SanPham
-                .FirstOrDefaultAsync(m => m.Id == id);
+            SanPhamVM sanPhamVM = new SanPhamVM();
+            SanPham sanPham = _context.SanPham.FirstOrDefault(x => x.Id == id);
+            KeySP keySP = _context.KeySP.FirstOrDefault(x => x.Id == sanPham.KeySPId);
+            GiamGia giamGia = _context.GiamGia.FirstOrDefault(x => x.Id == sanPham.GiamGiaId);
+            DanhMucSanPham dmsp =  _context.DanhMucSanPham.FirstOrDefault(x => x.Id == sanPham.DanhMucSanPhamId);
+
+            sanPhamVM.Id = sanPham.Id;
+            sanPhamVM.TenKey = keySP.KeyName;
+            sanPhamVM.TenDanhMucSanPham = dmsp.TenDanhMuc;
+            sanPhamVM.MaGiamGia = giamGia.Name;
+            sanPhamVM.TenSanPham = sanPham.TenSanPham;
+            sanPhamVM.ThongTin = sanPham.ThongTin;
+            sanPhamVM.GiaTien = sanPham.GiaTien;
+            sanPhamVM.Image = sanPham.Image;
+            sanPhamVM.NgayTao = sanPham.NgayTao;
+            sanPhamVM.NgaySua = sanPham.NgaySua;
+            sanPhamVM.RollNo = sanPham.RollNo;
+            sanPhamVM.listDMSP = _context.DanhMucSanPham.Where(x => x.Id == sanPham.DanhMucSanPhamId).ToList();
+            sanPhamVM.listGiamGia = _context.GiamGia.Where(x => x.Id == sanPham.GiamGiaId).ToList();
+            sanPhamVM.listKeySP = _context.KeySP.Where(x => x.Id == sanPham.KeySPId).ToList();
             if (sanPham == null)
             {
                 return NotFound();
             }
-
-            return View(sanPham);
+            return View(sanPhamVM);
         }
 
         // POST: Admin/SanPhams/Delete/5
-        [HttpPost, ActionName("DeleteConfirmed")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -238,6 +261,32 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         private bool SanPhamExists(int id)
         {
             return _context.SanPham.Any(e => e.Id == id);
+        }
+        private string Uploadfile(SanPhamVM model)
+        {
+            try
+            {
+                string filename = null;
+                if (model.Image != null)
+                {
+                    string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                    filename = model.ImageURL.FileName;
+                    string filepath = Path.Combine(uploadDir, filename);
+                    using (var fileStream = new FileStream(filepath, FileMode.Create))
+                    {
+                        model.ImageURL.CopyTo(fileStream);
+                    }
+                   
+
+                }
+                ViewBag.Message = "File Uploaded Successfully!!";
+                return filename;
+            }
+            catch
+            {
+                ViewBag.Message = "File upload failed!!";
+                return null;
+            }
         }
     }
 }

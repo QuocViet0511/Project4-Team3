@@ -5,42 +5,53 @@
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 
-<h1>Xóa Key sản phẩm</h1>
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h3 class="m-0 font-weight-bold text-primary">Bạn có muốn xóa Key này không ?</h3>
+        </div>
 
-<h3>Bạn có thực sự muốn xóa Key này?</h3>
-<div>
-    <h4>Key Sản Phẩm</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.KeyName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.KeyName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.KeyInfo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.KeyInfo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NgayTao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NgayTao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TrangThaiKey)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TrangThaiKey)
-        </dd>
-    </dl>
-    
-    <form asp-action="DeleteConfirmed">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a class="btn btn-primary" href="/Admin/KeySPs/Index">Quay lại</a>
-    </form>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.KeyName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="font-weight:bold;">
+                        @Html.DisplayFor(model => model.KeyName, new { htmlAttributes = new { @class = "form-control", style = "font-weight:bold;" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.KeyInfo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="font-weight:bold;">
+                        @Html.DisplayFor(model => model.KeyInfo, new { htmlAttributes = new { @class = "form-control", style = "font-weight:bold;" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NgayTao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="font-weight:bold;">
+                        @Html.DisplayFor(model => model.NgayTao, new { htmlAttributes = new { @class = "form-control", style = "font-weight:bold;" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TrangThaiKey, htmlAttributes: new { @class = "control-label col-md-2", style = "font-weight:bold;" })
+                    @Html.DisplayFor(model => model.TrangThaiKey)
+                  
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="submit" value="Delete" class="btn btn-danger" /> |
+                        <a class="btn btn-primary" href="/Admin/KeySPs">Quay lại</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>

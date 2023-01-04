@@ -53,8 +53,6 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // POST: Admin/KeySPs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(KeySP keySP)
@@ -133,9 +131,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            _context.KeySP.Remove(keySP);
-            await _context.SaveChangesAsync();
-            return Redirect("~/Admin/KeySPs");
+            return View(keySP);
         }
 
         // POST: Admin/KeySPs/Delete/5
