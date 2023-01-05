@@ -11,7 +11,7 @@
             <h3 class="m-0 font-weight-bold text-primary">Thêm sản phẩm</h3>
         </div>
 
-        @using (Html.BeginForm())
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
 
@@ -49,7 +49,7 @@
                     @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @*<input asp-for="ImageURL" type="file">*@
-                        @Html.EditorFor(model=>model.Image, new { htmlAttributes = new { @type = "file" } })
+                        @Html.EditorFor(model=>model.ImageURL, new { htmlAttributes = new { @type = "file" } })
                     </div>
                 </div>
                 <div class="form-group">
