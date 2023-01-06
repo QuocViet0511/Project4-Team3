@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<RepositoryLayer.SanPhamVM>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -19,6 +20,8 @@
     </div>
     <div class="clearfix"> </div>
 </div>
+
+
 <!--banner-ends-->
 <!--Slider-Starts-Here-->
 <script src="~/Scripts/js/responsiveslides.min.js"></script>
@@ -44,12 +47,23 @@
 </script>
 <!--End-slider-script-->
 <!--about-starts-->
+<div class="danhmuc">
+    <div class="container">
+
+        <ul>
+            @foreach (var item in Model.FirstOrDefault().listDMSP)
+            {
+                <li>@item.TenDanhMuc</li>
+            }
+        </ul>
+    </div>
+</div>
 <div class="about">
     <div class="container">
         <div class="about-top grid-1">
             <h1>Best seller ở đây</h1>
-            <div class="clearfix"></div>
-        </div>
+                <div class="clearfix"></div>
+            </div>
     </div>
 </div>
 <!--about-end-->
@@ -58,10 +72,20 @@
     <div class="container">
         <div class="product-top">
             <div class="product-one">
-              <h2>Danh sách sản phẩm ở đây</h2>
-                <div class="clearfix"></div>
-            </div>
-            <div class="product-one">
+                <h2>Danh sách sản phẩm ở đây</h2>
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                    <div class="card-deck" style="width:400px">
+                        <img class="card-img-top" src="~/images/anhsanpham/@Url.Content(item.Image)" alt="Card image" style=" width: 200px; height:200px; ">
+                        <div class="card-body">
+                            <h4 class="card-title">@item.TenSanPham</h4>
+                            <p class="card-text">@item.ThongTin</p>
+                            <a href="#" class="btn btn-primary">Chi tiết</a>
+                        </div>
+                    </div>
+                    }
+                </div>
                 <div class="clearfix"></div>
             </div>
         </div>

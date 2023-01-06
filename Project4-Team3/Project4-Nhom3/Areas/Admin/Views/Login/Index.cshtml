@@ -30,7 +30,7 @@
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", @style = "color: red" })
                 <div class="checkbox">
                     <label>
-                        <input name="RememberMe" type="checkbox" value="" />Remember Me
+                        <input name="RememberMe" type="checkbox" value="@Model.RememberMe" />Remember Me
                     </label>
                 </div>
                 <input class="btn btn-lg btn-success btn-block" type="submit" value="Login" />

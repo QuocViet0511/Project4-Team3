@@ -67,14 +67,33 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var sanPham = await _context.SanPham
-                .FirstOrDefaultAsync(m => m.Id == id);
+
+            SanPhamVM sanPhamVM = new SanPhamVM();
+            SanPham sanPham = _context.SanPham.FirstOrDefault(x => x.Id == id);
+            KeySP keySP = _context.KeySP.FirstOrDefault(x => x.Id == sanPham.KeySPId);
+            GiamGia giamGia = _context.GiamGia.FirstOrDefault(x => x.Id == sanPham.GiamGiaId);
+            DanhMucSanPham dmsp = _context.DanhMucSanPham.FirstOrDefault(x => x.Id == sanPham.DanhMucSanPhamId);
+
+            sanPhamVM.Id = sanPham.Id;
+            sanPhamVM.TenKey = keySP.KeyName;
+            sanPhamVM.TenDanhMucSanPham = dmsp.TenDanhMuc;
+            sanPhamVM.MaGiamGia = giamGia.Name;
+            sanPhamVM.TenSanPham = sanPham.TenSanPham;
+            sanPhamVM.ThongTin = sanPham.ThongTin;
+            sanPhamVM.GiaTien = sanPham.GiaTien;
+            sanPhamVM.Image = sanPham.Image;
+            sanPhamVM.NgayTao = sanPham.NgayTao;
+            sanPhamVM.NgaySua = sanPham.NgaySua;
+            sanPhamVM.RollNo = sanPham.RollNo;
+            sanPhamVM.listDMSP = _context.DanhMucSanPham.Where(x => x.Id == sanPham.DanhMucSanPhamId).ToList();
+            sanPhamVM.listGiamGia = _context.GiamGia.Where(x => x.Id == sanPham.GiamGiaId).ToList();
+            sanPhamVM.listKeySP = _context.KeySP.Where(x => x.Id == sanPham.KeySPId).ToList();
             if (sanPham == null)
             {
                 return NotFound();
             }
 
-            return View(sanPham);
+            return View(sanPhamVM);
         }
 
         // GET: Admin/SanPhams/Create
@@ -267,17 +286,15 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             try
             {
                 string filename = null;
-                if (model.Image != null)
+                if (model.ImageURL != null)
                 {
-                    string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                    string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images/anhsanpham");
                     filename = model.ImageURL.FileName;
                     string filepath = Path.Combine(uploadDir, filename);
                     using (var fileStream = new FileStream(filepath, FileMode.Create))
                     {
                         model.ImageURL.CopyTo(fileStream);
                     }
-                   
-
                 }
                 ViewBag.Message = "File Uploaded Successfully!!";
                 return filename;
