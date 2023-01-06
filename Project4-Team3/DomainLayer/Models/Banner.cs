@@ -4,5 +4,6 @@
     {
         public string UrlLink { get; set; }
         public string TieuDe { get; set; }
+        public bool isActive { get; set; }
     }
 }
