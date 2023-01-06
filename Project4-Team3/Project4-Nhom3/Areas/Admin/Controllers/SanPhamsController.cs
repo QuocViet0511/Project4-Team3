@@ -127,7 +127,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                     KeySPId = sanPhamVM.KeySPId,
                     GiaTien = sanPhamVM.GiaTien,
                     Image = stringImage,
-                    NgayTao = sanPhamVM.NgayTao,
+                    NgayTao = DateTime.Now,
                     NgaySua = sanPhamVM.NgaySua,
                     RollNo = sanPhamVM.RollNo,
                     TenSanPham = sanPhamVM.TenSanPham,
@@ -206,7 +206,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                     sanPham.GiaTien = sanPhamVM.GiaTien;
                     sanPham.Image = stringImage;
                     sanPham.NgayTao = sanPhamVM.NgayTao;
-                    sanPham.NgaySua = sanPhamVM.NgaySua;
+                    sanPham.NgaySua = DateTime.Now;
                     sanPham.RollNo = sanPhamVM.RollNo;
                     sanPham.TenSanPham = sanPhamVM.TenSanPham;
                     sanPham.ThongTin = sanPhamVM.ThongTin;
