@@ -21,14 +21,14 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/DanhMucSanPhams
-        [Route("Admin/DanhMucSanPhams")]
+        [HttpGet("Admin/DanhMucSanPhams")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.DanhMucSanPham.ToListAsync());
         }
 
         // GET: Admin/DanhMucSanPhams/Details/5
-        [Route("Admin/DanhMucSanPhams/Detail/{id}")]
+        [HttpGet("Admin/DanhMucSanPhams/Detail/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -61,7 +61,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                danhMucSanPham.SetNgayTao();
+                danhMucSanPham.NgayTao = DateTime.Now;
                 _context.Add(danhMucSanPham);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -70,7 +70,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/DanhMucSanPhams/Edit/5
-        [Route("Admin/DanhMucSanPhams/Edit/{id}")]
+        [HttpGet("Admin/DanhMucSanPhams/Edit/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,9 +89,9 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         // POST: Admin/DanhMucSanPhams/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost("Admin/DanhMucSanPhams/Edit/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,DanhMucSanPham danhMucSanPham)
+        public async Task<IActionResult> Edit(int id, DanhMucSanPham danhMucSanPham)
         {
             if (id != danhMucSanPham.Id)
             {
@@ -102,7 +102,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             {
                 try
                 {
-                    danhMucSanPham.SetNgaySua();
+                    danhMucSanPham.NgaySua = DateTime.Now;
                     _context.Update(danhMucSanPham);
                     await _context.SaveChangesAsync();
                 }
@@ -123,7 +123,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/DanhMucSanPhams/Delete/5
-        [Route("Admin/DanhMucSanPhams/Delete/{id}")]
+        [HttpGet("Admin/DanhMucSanPhams/Delete/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

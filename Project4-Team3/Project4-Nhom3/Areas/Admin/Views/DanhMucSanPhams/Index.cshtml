@@ -67,10 +67,16 @@
                                         @item.ThongTin
                                     </td>
                                     <td class="col-sm-2">
-                                        @item.NgayTao
+                                        <script >
+                                             var a = '@item.NgayTao';
+                                                document.write(a.substring(0,10));
+                                        </script>
                                     </td>
                                     <td class="col-sm-2">
-                                        @item.NgaySua
+                                        <script>
+                                            var a = '@item.NgaySua';
+                                            document.write(a.substring(0, 10));
+                                        </script>
                                     </td>
                                     <td class="col-sm-2"  style="text-align : center">
                                         @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })

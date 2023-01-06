@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DomainLayer.Models
 {
@@ -8,14 +9,6 @@ namespace DomainLayer.Models
         public string ThongTin { get; set; }
         public DateTime? NgayTao { get; set; }
         public DateTime? NgaySua { get; set; }
-
-        public void SetNgayTao()
-        {
-            this.NgayTao = DateTime.Now;
-        }
-        public void SetNgaySua()
-        {
-            this.NgaySua = DateTime.Now;
-        }
+        
     }
 }
