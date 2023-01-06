@@ -21,13 +21,14 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/Banners
+        [HttpGet("Admin/Banners")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Banner.ToListAsync());
         }
 
         // GET: Admin/Banners/Details/5
-        [Route("Banner/Detail/{id}")]
+        [HttpGet("Admin/Banners/Details/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,7 +47,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/Banners/Create
-        [Route("Banner/Create")]
+        [HttpGet("Admin/Banners/Create")]
         public IActionResult Create()
         {
             return View();
@@ -63,13 +64,13 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             {
                 _context.Add(banner);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Redirect("~/Admin/Banners");
             }
             return View(banner);
         }
 
         // GET: Admin/Banners/Edit/5
-        [Route("Banner/Edit/{id}")]
+        [HttpGet("Admin/Banners/Edit/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -115,13 +116,13 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Redirect("~/Admin/Banners");
             }
             return View(banner);
         }
 
         // GET: Admin/Banners/Delete/5
-        [Route("Banner/Delete/{id}")]
+        [HttpGet("Admin/Banners/Delete/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -147,7 +148,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             var banner = await _context.Banner.FindAsync(id);
             _context.Banner.Remove(banner);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return Redirect("~/Admin/Banners");
         }
 
         private bool BannerExists(int id)
