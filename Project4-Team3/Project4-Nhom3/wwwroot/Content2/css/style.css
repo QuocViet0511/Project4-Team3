@@ -702,6 +702,7 @@ figure.effect-bubba {
 
     .product .product-one .row {
         display: flex;
+        flex-wrap: wrap;
     }
 
         .product .product-one .row .card-desk {
@@ -3726,7 +3727,9 @@ h3.ghj {
         color: white;
         margin: 0 3px;
     }
-
+#Tb button{
+    display:flex;
+}
 
 
 /*--media-quaries-end-here--*/

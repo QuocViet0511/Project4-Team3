@@ -58,5 +58,20 @@ namespace Project4_Nhom3.Controllers
 
             return View(sanPhamVM);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ThemGioHang(List<SanPhamVM> listSPVM)
+        {
+
+
+            return View(listSPVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> MuaNgay(int? id)
+        {
+
+
+            return View();
+        }
     }
 }
