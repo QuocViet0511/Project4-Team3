@@ -54,11 +54,9 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // POST: Admin/GiamGias/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,ThongTin,PhanTramGiamGia,TrangThai,NgayTao,NgaySua,Id")] GiamGia giamGia)
+        public async Task<IActionResult> Create(GiamGia giamGia)
         {
             if (ModelState.IsValid)
             {
@@ -87,8 +85,6 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // POST: Admin/GiamGias/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, GiamGia giamGia)
