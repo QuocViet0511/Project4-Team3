@@ -68,14 +68,14 @@
                                     </td>
                                     <td class="col-sm-2">
                                         <script >
-                                             var a = '@item.NgayTao';
-                                                document.write(a.substring(0,10));
+                                            var a = '@item.NgayTao';
+                                            document.write(a.substring(0,a.lastIndexOf("/")+5));
                                         </script>
-                                    </td>
+                                    </td>      
                                     <td class="col-sm-2">
                                         <script>
                                             var a = '@item.NgaySua';
-                                            document.write(a.substring(0, 10));
+                                            document.write(a.substring(0,a.lastIndexOf("/")+5));
                                         </script>
                                     </td>
                                     <td class="col-sm-2"  style="text-align : center">
