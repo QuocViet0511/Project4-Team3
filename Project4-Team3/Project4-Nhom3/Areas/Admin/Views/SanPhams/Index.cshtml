@@ -6,17 +6,6 @@
 }
 
 <link href="~/Content/Data/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-<style>
-	.text-overflow {
-		height: 100px;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		line-height: 25px;
-		-webkit-line-clamp: 3;
-		-webkit-box-orient: vertical;
-		max-width: 100% !important;
-	}
-</style>
 <div id="content">
 
 	<!-- Topbar -->
@@ -97,10 +86,10 @@
                                     @item.GiaTien
                                 </td>
                                 <td class="col-sm-3">
-                                    @item.NgayTao
+                                    <div class="date-format">@item.NgayTao</div>
                                 </td>
                                 <td class="col-sm-3">
-                                    @item.NgaySua
+                                    <div class="date-format">@item.NgaySua</div>
                                 </td>
                                 <td class="col-sm-3">
                                     @item.MaGiamGia
@@ -122,6 +111,6 @@
                 </div>
             </div>
         </div>
-
+        <script src="~/js/site.js"></script>
 	</div>
 </div>

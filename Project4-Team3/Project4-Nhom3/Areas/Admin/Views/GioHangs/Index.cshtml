@@ -40,44 +40,24 @@
                                 <th style="color:white">Tuỳ chọn</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.SanPhamId)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.UserId)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.SoLuong)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.TongTien)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.NgayTao)
-                                </th>
-                                <th></th>
-                            </tr>
-                        </tfoot>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.SanPhamId)
+                                        @item.SanPhamId
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.UserId)
+                                        @item.UserId
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.SoLuong)
+                                        @item.SoLuong
                                     </td>
                                     <td class="col-sm-3">
-                                        @Html.DisplayFor(modelItem => item.TongTien)
+                                        @item.TongTien
                                     </td>
                                     <td class="col-sm-3">
-                                        @Html.DisplayFor(modelItem => item.NgayTao)
+										<div class="date-format">@item.NgayTao</div>
                                     </td>
                                     <td style="text-align : center">
                                         @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
@@ -91,7 +71,7 @@
                 </div>
             </div>
         </div>
-
+        <script src="~/js/site.js"></script>
     </div>
     <!-- /.container-fluid -->
 </div>
