@@ -85,6 +85,9 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             sanPhamVM.NgayTao = sanPham.NgayTao;
             sanPhamVM.NgaySua = sanPham.NgaySua;
             sanPhamVM.RollNo = sanPham.RollNo;
+            sanPhamVM.KeySPId = sanPham.KeySPId;
+            sanPhamVM.DanhMucSanPhamId = sanPham.DanhMucSanPhamId;
+            sanPhamVM.GiamGiaId = sanPham.GiamGiaId;
             sanPhamVM.listDMSP = _context.DanhMucSanPham.Where(x => x.Id == sanPham.DanhMucSanPhamId).ToList();
             sanPhamVM.listGiamGia = _context.GiamGia.Where(x => x.Id == sanPham.GiamGiaId).ToList();
             sanPhamVM.listKeySP = _context.KeySP.Where(x => x.Id == sanPham.KeySPId).ToList();
