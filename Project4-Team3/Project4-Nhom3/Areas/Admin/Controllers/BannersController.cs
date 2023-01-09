@@ -92,10 +92,10 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                 {
                     Id = banner.Id,
                     TieuDe = banner.TieuDe,
-                    UrlLink = stringImage,
+                    UrlLink = banner.UrlLink,
                     isActive = banner.isActive,
                 };
-                _context.Add(banner);
+                _context.Add(banners);
                 await _context.SaveChangesAsync();
                 return Redirect("~/Admin/Banners");
             }
