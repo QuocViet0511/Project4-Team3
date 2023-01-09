@@ -103,7 +103,7 @@ namespace Project4_Nhom3.Controllers
 
         public ActionResult Logout()
         {
-            _session.SetString(CommonConstands.USER_SESSION, "");
+            _session.Remove(CommonConstands.USER_SESSION);
             return Redirect("~/");
         }
 
