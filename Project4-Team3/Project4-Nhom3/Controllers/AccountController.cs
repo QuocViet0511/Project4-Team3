@@ -79,7 +79,8 @@ namespace Project4_Nhom3.Controllers
                     userSession.Id = user.Id;
                     userSession.UserName = user.UserName;
                     _session.SetString(CommonConstands.USER_SESSION, userSession.UserName);
-                    return Redirect("~/");
+					_session.SetString(CommonConstands.USER_ID_SESSION, userSession.Id.ToString()); 
+					return Redirect("~/");
                 }
                 else if (result == 0)
                 {

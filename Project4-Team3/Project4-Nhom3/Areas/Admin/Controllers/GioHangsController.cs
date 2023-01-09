@@ -67,7 +67,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                gioHang.SetNgayTao();
+                gioHang.NgayTao = DateTime.Now;
 				_gioHangService.InsertGioHang(gioHang);
                 return RedirectToAction(nameof(Index));
             }
