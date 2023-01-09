@@ -8,6 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using DomainLayer.Models;
 using RepositoryLayer;
 using ServiceLayer.Service;
+using System.Web;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json.Linq;
+using System.Web.Helpers;
+using DomainLayer.DTO;
+using System.Collections;
+using Project4_Nhom3.Common;
 
 namespace Project4_Nhom3.Controllers
 {
@@ -15,19 +22,44 @@ namespace Project4_Nhom3.Controllers
     {
         private readonly DataDbContext _context;
         private readonly IGioHangDTOService _gioHangDTOService;
+        private readonly ISanPhamService _sanPhamService;
+		private readonly IHttpContextAccessor _httpContextAccessor;
+		private ISession _session => _httpContextAccessor.HttpContext.Session;
 
-        public GioHangsController(DataDbContext context, IGioHangDTOService gioHangDTOService)
+		public GioHangsController(DataDbContext context, IGioHangDTOService gioHangDTOService, ISanPhamService sanPhamService, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _gioHangDTOService = gioHangDTOService;
-        }
-
-        // GET: GioHangs
-        public async Task<IActionResult> Index()
+            _sanPhamService = sanPhamService;
+			_httpContextAccessor = httpContextAccessor;
+		}
+        
+        [HttpPost]
+        public async Task<IActionResult> Index(/*HttpRequest Request*/)
         {
-            return View(_gioHangDTOService.GetAll());
+            var List = new List<GioHangDTO>();
+            string cookie = HttpContext.Request.Headers["Cookie"].ToString();
+            int start = cookie.IndexOf("; cart={")+2;
+            string cartJson = cookie.Substring(start+5, cookie.IndexOf("}", start) - start - 4);
+            var cart = JObject.Parse(cartJson);
+			decimal? TongTien = 0;
+			foreach (KeyValuePair<String, JToken> item in cart)
+                {
+                    int id = int.Parse(item.Key);
+                    int SoLuong = int.Parse((string)item.Value);
+                    SanPham _sanPham = _sanPhamService.GetSanPham(id);
+					List.Add(new GioHangDTO
+                    {
+                        SoLuong = SoLuong,
+                        TongTien = _sanPham.GiaTien* SoLuong,
+                        sanPham = _sanPham,
+                        user = _context.Users.FirstOrDefault()
+                    });
+                    TongTien += _sanPham.GiaTien * SoLuong;
+				}
+			_session.SetString(CommonConstands.TONGTIEN_SESSION, TongTien.ToString());
+			return View(List);
         }
-
         // GET: GioHangs/Details/5
         public async Task<IActionResult> Details(int? id)
         {

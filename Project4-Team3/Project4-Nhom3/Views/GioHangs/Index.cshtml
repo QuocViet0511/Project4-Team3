@@ -1,58 +1,92 @@
 ﻿@model IEnumerable<DomainLayer.DTO.GioHangDTO>
-
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor context;
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	var TongTienSession = context.HttpContext.Session.GetString(Project4_Nhom3.Common.CommonConstands.TONGTIEN_SESSION);
 }
+
+
 <style>
-    .widthTd{
-        width ="80px";
-    }
+	.widthTd {
+		width ="80px";
+	}
 </style>
 <h1 style="text-align: center; width: 100%;">Giỏ hàng</h1>
-
-<div style="padding-right:200px;padding-left:200px">
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Tên sản phẩm
-            </th>
-            <th>
-                đơn giá
-            </th>
-            <th>
-                số lượng 
-            </th>
-            <th>
-                Thành tiền
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        
-			@foreach (var item in Model)
-			{
-                <tr style="font-weight: bold;">
-					<td>
-                        <img src="~/images/anhsanpham/@item.sanPham.Image" width="80px">
-                        @Html.DisplayFor(modelItem => item.sanPham.TenSanPham)
-					</td>
-                    <td >
-                        @Html.DisplayFor(modelItem => item.sanPham.GiaTien)
-					</td>
-                    <td >
-                        <input type="number" value="@Html.DisplayFor(modelItem => item.SoLuong)">
-					</td>
-                    <td >
-						@Html.DisplayFor(modelItem => item.TongTien)
-					</td>
-                    <td >
-                        <a asp-action="Delete" asp-route-id="@item.Id"><svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="24px" height="24px"><path d="M 10 2 L 9 3 L 5 3 C 4.4 3 4 3.4 4 4 C 4 4.6 4.4 5 5 5 L 7 5 L 17 5 L 19 5 C 19.6 5 20 4.6 20 4 C 20 3.4 19.6 3 19 3 L 15 3 L 14 2 L 10 2 z M 5 7 L 5 20 C 5 21.1 5.9 22 7 22 L 17 22 C 18.1 22 19 21.1 19 20 L 19 7 L 5 7 z M 9 9 C 9.6 9 10 9.4 10 10 L 10 19 C 10 19.6 9.6 20 9 20 C 8.4 20 8 19.6 8 19 L 8 10 C 8 9.4 8.4 9 9 9 z M 15 9 C 15.6 9 16 9.4 16 10 L 16 19 C 16 19.6 15.6 20 15 20 C 14.4 20 14 19.6 14 19 L 14 10 C 14 9.4 14.4 9 15 9 z"/></svg></a>
-					</td>
+<form action="GioHangs/Edit" method="post">
+	<div style="padding-right:200px;padding-left:200px">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>
+						Tên sản phẩm
+					</th>
+					<th>
+						đơn giá
+					</th>
+					<th>
+						số lượng
+					</th>
+					<th>
+						Thành tiền
+					</th>
+					<th></th>
 				</tr>
-			}    
-    </tbody>
-</table>
-</div>
+			</thead>
+			<tbody>
+
+				@foreach (var item in Model)
+				{
+					<tr style="font-weight: bold;">
+						<td>
+							<img src="~/images/anhsanpham/@item.sanPham.Image" height="80px">
+							@Html.DisplayFor(modelItem => item.sanPham.TenSanPham)
+						</td>
+						<td id='GiaTienSP_@item.sanPham.Id'>@item.sanPham.GiaTien</td>
+						<td>
+							<input id="SoLuongSP_@item.sanPham.Id" onchange="ChangeTongTien('@item.sanPham.Id')"
+							   name="@item.sanPham.Id" type="number" Value="@item.SoLuong">
+						</td>
+						<td id='TongTienSP_@item.sanPham.Id'>
+							@item.TongTien
+						</td>
+						<td>
+							<a asp-action="Delete" asp-route-id="@item.Id"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px"><path d="M 10 2 L 9 3 L 5 3 C 4.4 3 4 3.4 4 4 C 4 4.6 4.4 5 5 5 L 7 5 L 17 5 L 19 5 C 19.6 5 20 4.6 20 4 C 20 3.4 19.6 3 19 3 L 15 3 L 14 2 L 10 2 z M 5 7 L 5 20 C 5 21.1 5.9 22 7 22 L 17 22 C 18.1 22 19 21.1 19 20 L 19 7 L 5 7 z M 9 9 C 9.6 9 10 9.4 10 10 L 10 19 C 10 19.6 9.6 20 9 20 C 8.4 20 8 19.6 8 19 L 8 10 C 8 9.4 8.4 9 9 9 z M 15 9 C 15.6 9 16 9.4 16 10 L 16 19 C 16 19.6 15.6 20 15 20 C 14.4 20 14 19.6 14 19 L 14 10 C 14 9.4 14.4 9 15 9 z" /></svg></a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+		<div class="container" style="margin-bottom:100px">
+			<div class="col-md-8">
+				<H3>
+					Tổng giá trị đơn Hàng là : $
+					<span id="TongHoaDon">@TongTienSession</span>
+				</H3>
+			</div>
+			<div class="col-md-4">
+				<button type="submit" class="btn btn-success">Thanh toán</button>
+			</div>
+		</div>
+	</div>
+</form>
+<script>
+	function ChangeTongTien(id) {
+		var GiaTien = parseFloat(document.getElementById('GiaTienSP_' + id).innerHTML.replace(',', '.'));
+		var SoLuong = document.getElementById('SoLuongSP_' + id).value;
+
+		SetTongHoaDon(parseFloat(document.getElementById('TongTienSP_' + id).innerHTML.replace(',', '.')), GiaTien * SoLuong)
+
+		$('#TongTienSP_' + id).text(GiaTien * SoLuong);
+
+		UpdateCart(id, SoLuong);
+	}
+	function SetTongHoaDon(TongtienBanDau, TongtienMoi) {
+		console.log(document.getElementById('TongHoaDon').innerHTML)
+		console.log(TongtienBanDau)
+		console.log(TongtienMoi)
+		$('#TongHoaDon').text(parseFloat(document.getElementById('TongHoaDon').innerHTML.replace(',', '.')) - TongtienBanDau + TongtienMoi);
+	}
+</script>
+<script src="~/js/JavaScript.js"></script>

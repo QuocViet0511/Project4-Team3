@@ -7,34 +7,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DomainLayer.Models;
 using RepositoryLayer;
-using ServiceLayer.Service;
-using DomainLayer.DTO;
 
 namespace Project4_Nhom3.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class GioHangsController : Controller
+    public class UsersController : Controller
     {
         private readonly DataDbContext _context;
-        private readonly IGioHangService _gioHangService;
-        private readonly IGioHangDTOService _gioHangDTOService;
 
-        public GioHangsController(DataDbContext context, IGioHangService gioHangService, IGioHangDTOService gioHangDTOService)
+        public UsersController(DataDbContext context)
         {
             _context = context;
-            _gioHangService = gioHangService;
-            _gioHangDTOService = gioHangDTOService;
         }
 
-        // GET: Admin/GioHangs
-        [Route("Admin/GioHangs")]
+        // GET: Admin/Users
         public async Task<IActionResult> Index()
         {
-            return View(_gioHangDTOService.GetAll());
+            return View(await _context.Users.ToListAsync());
         }
 
-        // GET: Admin/GioHangs/Details/5
-        [Route("Admin/GioHangs/Detail/{id}")]
+        // GET: Admin/Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -42,62 +34,62 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var gioHang = await _context.GioHang
+            var users = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (gioHang == null)
+            if (users == null)
             {
                 return NotFound();
             }
 
-            return View(gioHang);
+            return View(users);
         }
 
-        // GET: Admin/GioHangs/Create
+        // GET: Admin/Users/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/GioHangs/Create
+        // POST: Admin/Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(GioHang gioHang)
+        public async Task<IActionResult> Create([Bind("RoleId,UserName,Password,Phone,Email,NgayTao,NgaySua,Avatar,Id")] Users users)
         {
             if (ModelState.IsValid)
             {
-                gioHang.SetNgayTao();
-				_gioHangService.InsertGioHang(gioHang);
+                _context.Add(users);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(gioHang);
+            return View(users);
         }
 
-        // GET: Admin/GioHangs/Edit/5
-        [HttpGet("Admin/GioHangs/Edit/{id}")]
-        public async Task<IActionResult> Edit(int id)
+        // GET: Admin/Users/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            var gioHang = _gioHangService.GetGioHang(id);
-            if (gioHang == null)
+
+            var users = await _context.Users.FindAsync(id);
+            if (users == null)
             {
                 return NotFound();
             }
-            return View(gioHang);
+            return View(users);
         }
 
-        // POST: Admin/GioHangs/Edit/5
+        // POST: Admin/Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, GioHang gioHang)
+        public async Task<IActionResult> Edit(int id, [Bind("RoleId,UserName,Password,Phone,Email,NgayTao,NgaySua,Avatar,Id")] Users users)
         {
-            if (id != gioHang.Id)
+            if (id != users.Id)
             {
                 return NotFound();
             }
@@ -106,11 +98,12 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
             {
                 try
                 {
-                    _gioHangService.UpdateGioHang(gioHang);
+                    _context.Update(users);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GioHangExists(gioHang.Id))
+                    if (!UsersExists(users.Id))
                     {
                         return NotFound();
                     }
@@ -119,13 +112,12 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return Redirect("~/Admin/GioHangs");
+                return RedirectToAction(nameof(Index));
             }
-            return View(gioHang);
+            return View(users);
         }
 
-        // GET: Admin/GioHangs/Delete/5
-        [Route("Admin/GioHangs/Delete/{id}")]
+        // GET: Admin/Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -133,30 +125,30 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var gioHang = await _context.GioHang
+            var users = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (gioHang == null)
+            if (users == null)
             {
                 return NotFound();
             }
 
-            return View(gioHang);
+            return View(users);
         }
 
-        // POST: Admin/GioHangs/Delete/5
+        // POST: Admin/Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var gioHang = await _context.GioHang.FindAsync(id);
-            _context.GioHang.Remove(gioHang);
+            var users = await _context.Users.FindAsync(id);
+            _context.Users.Remove(users);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool GioHangExists(int id)
+        private bool UsersExists(int id)
         {
-            return _context.GioHang.Any(e => e.Id == id);
+            return _context.Users.Any(e => e.Id == id);
         }
     }
 }

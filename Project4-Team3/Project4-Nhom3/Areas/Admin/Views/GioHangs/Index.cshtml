@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DomainLayer.Models.GioHang>
+﻿@model IEnumerable<DomainLayer.DTO.GioHangDTO>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,8 +14,8 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h4 class="m-0 font-weight-bold text-primary">Danh sách Giỏ hàng</h4>
-                <a class="float-lg-right btn btn-primary" href="/Admin/GioHangs/Create">Thêm loại Giỏ hàng</a>
-
+@*                <a class="float-lg-right btn btn-primary" href="/Admin/GioHangs/Create">Thêm mới Giỏ hàng</a>
+*@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -23,46 +23,47 @@
                         <thead>
                             <tr style="Background: #456bd9">
                                 <th style="color:white">
-                                    @Html.DisplayNameFor(model => model.SanPhamId)
+                                    Sản Phẩm
                                 </th>
                                 <th style="color:white">
-                                    @Html.DisplayNameFor(model => model.UserId)
+                                    User
                                 </th>
                                 <th style="color:white">
-                                    @Html.DisplayNameFor(model => model.SoLuong)
+                                    Số lượng
                                 </th>
                                 <th style="color:white">
-                                    @Html.DisplayNameFor(model => model.TongTien)
+                                    Tổng tiền
                                 </th>
                                 <th style="color:white">
-                                    @Html.DisplayNameFor(model => model.NgayTao)
+                                    Ngày Tạo
                                 </th>
-                                <th style="color:white">Tuỳ chọn</th>
+                                @*<th style="color:white">Tuỳ chọn</th>*@
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>
-                                        @item.SanPhamId
+                                    <td class="col-sm-3" style="text-align : center">
+                                            <img src="~/images/anhsanpham/@item.sanPham.Image" height="80px">
+                                        <div>@item.sanPham.TenSanPham</div>
                                     </td>
-                                    <td>
-                                        @item.UserId
+                                        <td class="col-sm-3">
+                                        @item.user.UserName
                                     </td>
-                                    <td>
+                                        <td class="col-sm-2">
                                         @item.SoLuong
                                     </td>
-                                    <td class="col-sm-3">
+                                    <td class="col-sm-2">
                                         @item.TongTien
                                     </td>
                                     <td class="col-sm-3">
 										<div class="date-format">@item.NgayTao</div>
                                     </td>
-                                    <td style="text-align : center">
+                                    @*<td style="text-align : center" class="col-sm-2">
                                         @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
                                         @Html.ActionLink("Xoá", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
-                                    </td>
+                                    </td>*@
                                 </tr>
                             }
 
