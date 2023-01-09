@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DomainLayer.Models;
 using RepositoryLayer;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Project4_Nhom3.Areas.Admin.Controllers
 {
@@ -14,17 +17,30 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
     public class BannersController : Controller
     {
         private readonly DataDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public BannersController(DataDbContext context)
+        public BannersController(DataDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Admin/Banners
         [HttpGet("Admin/Banners")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Banner.ToListAsync());
+            var listBanners = (from bn in _context.Banner
+
+                               select new Banner
+                               {
+                                   Id = bn.Id,
+                                   TieuDe = bn.TieuDe,
+                                   UrlLink = bn.UrlLink,
+                                   isActive = bn.isActive,
+                               }).AsEnumerable().ToList();
+
+
+            return View(listBanners);
         }
 
         // GET: Admin/Banners/Details/5
@@ -36,8 +52,13 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var banner = await _context.Banner
-                .FirstOrDefaultAsync(m => m.Id == id);
+            Banner banner = new Banner();
+
+            banner.Id = banner.Id;
+            banner.TieuDe = banner.TieuDe;
+            banner.UrlLink = banner.UrlLink;
+            banner.isActive = banner.isActive;
+
             if (banner == null)
             {
                 return NotFound();
@@ -50,6 +71,8 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         [HttpGet("Admin/Banners/Create")]
         public IActionResult Create()
         {
+            var listBanners = _context.Banner.AsEnumerable().ToList();
+            ViewBag.BN = new SelectList(listBanners, "Id", "TieuDe");
             return View();
         }
 
@@ -58,10 +81,20 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UrlLink,TieuDe,Id")] Banner banner)
+        public async Task<IActionResult> Create(Banner banner, IFormFile UrlLink)
         {
+            banner.UrlLink = UrlLink;
+            var stringImage = Uploadfile(banner);
             if (ModelState.IsValid)
             {
+
+                Banner banners = new Banner()
+                {
+                    Id = banner.Id,
+                    TieuDe = banner.TieuDe,
+                    UrlLink = stringImage,
+                    isActive = banner.isActive,
+                };
                 _context.Add(banner);
                 await _context.SaveChangesAsync();
                 return Redirect("~/Admin/Banners");
@@ -78,7 +111,13 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var banner = await _context.Banner.FindAsync(id);
+            Banner banner = new Banner();
+
+            banner.Id = banner.Id;
+            banner.TieuDe = banner.TieuDe;
+            banner.UrlLink = banner.UrlLink;
+            banner.isActive = banner.isActive;
+
             if (banner == null)
             {
                 return NotFound();
@@ -91,7 +130,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UrlLink,TieuDe,Id")] Banner banner)
+        public async Task<IActionResult> Edit(int id, Banner banner)
         {
             if (id != banner.Id)
             {
@@ -100,8 +139,15 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
+                var stringImage = Uploadfile(banner);
                 try
                 {
+                    Banner banner1 = _context.Banner.FirstOrDefault(x => x.Id == id);
+                    banner.Id = banner.Id;
+                    banner.TieuDe = banner.TieuDe;
+                    banner.UrlLink = banner.UrlLink;
+                    banner.isActive = banner.isActive;
+
                     _context.Update(banner);
                     await _context.SaveChangesAsync();
                 }
@@ -130,13 +176,17 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var banner = await _context.Banner
-                .FirstOrDefaultAsync(m => m.Id == id);
+            Banner banner = new Banner();
+
+            banner.Id = banner.Id;
+            banner.TieuDe = banner.TieuDe;
+            banner.UrlLink = banner.UrlLink;
+            banner.isActive = banner.isActive;
+
             if (banner == null)
             {
                 return NotFound();
             }
-
             return View(banner);
         }
 
@@ -154,6 +204,30 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         private bool BannerExists(int id)
         {
             return _context.Banner.Any(e => e.Id == id);
+        }
+        private string Uploadfile(Banner model)
+        {
+            try
+            {
+                string filename = null;
+                if (model.UrlLink != null)
+                {
+                    string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images/anhsanpham");
+                    filename = model.UrlLink;
+                    string filepath = Path.Combine(uploadDir, filename);
+                    using (var fileStream = new FileStream(filepath, FileMode.Create))
+                    {
+                        model.UrlLink.CopyTo(fileStream);
+                    }
+                }
+                ViewBag.Message = "File Uploaded Successfully!!";
+                return filename;
+            }
+            catch
+            {
+                ViewBag.Message = "File upload failed!!";
+                return null;
+            }
         }
     }
 }
