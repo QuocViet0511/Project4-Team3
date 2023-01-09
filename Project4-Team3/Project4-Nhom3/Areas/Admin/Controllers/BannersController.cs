@@ -213,7 +213,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
                 if (model.UrlLink != null)
                 {
                     string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images/anhsanpham");
-                    filename = model.UrlLink;
+                    filename = model.UrlLink.FileName;
                     string filepath = Path.Combine(uploadDir, filename);
                     using (var fileStream = new FileStream(filepath, FileMode.Create))
                     {
