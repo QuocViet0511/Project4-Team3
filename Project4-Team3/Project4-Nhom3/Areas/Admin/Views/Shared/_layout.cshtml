@@ -1,4 +1,8 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor context;
+@{
+    var userSession = context.HttpContext.Session.GetString(Project4_Nhom3.Common.CommonConstands.ADMIN_SESSION);
+}
 
 <html lang="en">
 
@@ -19,32 +23,34 @@
 
     <!-- Custom styles for this template-->
     <link href="~/Content/Data/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/Content/Data/css/comment.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top">
-    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            @if (@ViewBag.userName != null)
-            {
-                @ViewBag.userName
-                ;
-            } <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-user">
-            <li>
-                <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="~/Admin/Home/Logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-            </li>
-        </ul>
-        <!-- /.dropdown-user -->
-    </li>
+    @if (userSession != null)
+    {
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                @userSession
+                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li>
+                    <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="~/Admin/Home/Logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                </li>
+            </ul>
+            <!-- /.dropdown-user -->
+        </li>
+    }
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -88,9 +94,9 @@
                         @* @{
                         for (int i = 0; i < dtlsp.Rows.Count; i++)
                         {
-                            <a class="collapse-item" href="/Admin/SanPhams/ProductsbyCata/@dtlsp.Rows[i][0].ToString()">@dtlsp.Rows[i][1].ToString()</a>
+                        <a class="collapse-item" href="/Admin/SanPhams/ProductsbyCata/@dtlsp.Rows[i][0].ToString()">@dtlsp.Rows[i][1].ToString()</a>
                         }
-                    }*@
+                        }*@
 
                         @*<a class="collapse-item" href="cards.html">Cards</a>*@
                     </div>
@@ -111,13 +117,13 @@
                         @* @{
                         for (int i = 0; i < dtTH.Rows.Count; i++)
                         {
-                            <a class="collapse-item" href="/Admin/SanPhams/ProductsbyTH/@dtTH.Rows[i][0].ToString()">@dtTH.Rows[i][1].ToString()</a>
+                        <a class="collapse-item" href="/Admin/SanPhams/ProductsbyTH/@dtTH.Rows[i][0].ToString()">@dtTH.Rows[i][1].ToString()</a>
                         }
-                    }
+                        }
                         *@
                         @*<a class="collapse-item" href="utilities-border.html">Borders</a>
-                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                    <a class="collapse-item" href="utilities-other.html">Other</a>*@
+                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                        <a class="collapse-item" href="utilities-other.html">Other</a>*@
                     </div>
                 </div>
             </li>

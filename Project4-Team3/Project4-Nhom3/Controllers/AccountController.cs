@@ -79,8 +79,8 @@ namespace Project4_Nhom3.Controllers
                     userSession.Id = user.Id;
                     userSession.UserName = user.UserName;
                     _session.SetString(CommonConstands.USER_SESSION, userSession.UserName);
-					_session.SetInt32(CommonConstands.USER_ID_SESSION, userSession.Id); 
-					return Redirect("~/");
+                    _session.SetInt32("UserId", user.Id);
+                    return Redirect("~/");
                 }
                 else if (result == 0)
                 {
@@ -104,7 +104,7 @@ namespace Project4_Nhom3.Controllers
 
         public ActionResult Logout()
         {
-            _session.SetString(CommonConstands.USER_SESSION, "");
+            _session.Remove(CommonConstands.USER_SESSION);
             return Redirect("~/");
         }
 

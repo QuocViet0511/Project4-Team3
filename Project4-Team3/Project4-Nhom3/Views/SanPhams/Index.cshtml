@@ -1,9 +1,13 @@
 ﻿@model RepositoryLayer.SanPhamVM
-
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor context;
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var userSessionId = context.HttpContext.Session.GetString("UserId");
+    var userSession = context.HttpContext.Session.GetString(Project4_Nhom3.Common.CommonConstands.USER_SESSION);
 }
+
 
 <section>
     <div class="container">
@@ -78,6 +82,31 @@
                 <div class="row">
                     <p>VIDEO</p>
                 </div>
+             @*@if (userSessionId != null)
+            {*@
+            <div class="row">
+                <label class="control-label">Bình luận</label>
+
+                <div class="container mt-5">
+                    <div class="d-flex justify-content-center row">
+                        <div class="col-2">
+                            <div class="d-flex flex-row align-items-start">
+                                <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                                <span>@userSession</span></div>
+                        </div>
+                        <div class="col-8">
+                            <div class="d-flex flex-column comment-section">
+                                <div class="bg-light p-2">
+                                    <textarea class="form-control ml-1 shadow-none textarea"></textarea>
+                                    <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="button">Post comment</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*}*@
             </div>
     </section>
 <script src="~/js/JavaScript.js"></script>

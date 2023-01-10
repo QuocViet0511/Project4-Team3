@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project4_Nhom3.Common;
+using RepositoryLayer;
 using ServiceLayer.Service;
 using System;
 
@@ -11,6 +12,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private ISession _session => _httpContextAccessor.HttpContext.Session;
+
         public HomeController(IUserService userService, IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
@@ -19,7 +21,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         {
             var userSession = _session.GetString(CommonConstands.ADMIN_SESSION);
             ViewBag.userName = userSession;
-            if (string.IsNullOrEmpty(userSession))
+            if (userSession == null)
             {
                 return Redirect("~/Admin/Login");
             }
@@ -30,7 +32,8 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         {
             try
             {
-                _session.SetString(CommonConstands.ADMIN_SESSION, "");
+                _session.Remove(CommonConstands.ADMIN_SESSION);
+
                 return Redirect("~/Admin/Login");
             }
             catch(Exception ex)

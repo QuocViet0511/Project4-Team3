@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 userMenu">
-                    @if (userSession == "" || userSession == null)
+                    @if (userSession == null)
                     {
                         <div>
                             <span><a href="~/Account/Login">Sign In</a></span>
@@ -73,20 +73,18 @@
                         </div>
                     }
                 </div>
-                <form action="~/GioHangs" method="post">
                 <div class="col-md-2 top-header-left">
                     <div class="cart box_1">
-                        <button type="submit">
+                        <a href="~/GioHangs">
                             <div class="total">
                                 <span></span>
                             </div>
-                            <img src="~/images/cart-1.png" alt="Cart" />
-                        </button>
+                            <img src="~/images/cart-1.png" alt="" />
+                        </a>
                         <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
                         <div class="clearfix"> </div>
                     </div>
                 </div>
-                </form>
                 <div class="clearfix"></div>
             </div>
         </div>
