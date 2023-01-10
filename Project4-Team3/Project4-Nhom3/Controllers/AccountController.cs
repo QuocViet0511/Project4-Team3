@@ -79,7 +79,7 @@ namespace Project4_Nhom3.Controllers
                     userSession.Id = user.Id;
                     userSession.UserName = user.UserName;
                     _session.SetString(CommonConstands.USER_SESSION, userSession.UserName);
-					_session.SetString(CommonConstands.USER_ID_SESSION, userSession.Id.ToString()); 
+					_session.SetInt32(CommonConstands.USER_ID_SESSION, userSession.Id); 
 					return Redirect("~/");
                 }
                 else if (result == 0)

@@ -38,14 +38,8 @@ namespace Project4_Nhom3.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Index(/*HttpRequest Request*/)
+		public async Task<IActionResult> Index()
 		{
-			/*var test = HttpContext.Request.Cookies.Keys;
-			foreach (var item in test)
-			{
-				string a = item;
-			}*/
-
 			var List = new List<GioHangDTO>();
 			string cookie = HttpContext.Request.Headers["Cookie"].ToString();
 			int start = cookie.IndexOf("; cart={") + 2;
@@ -66,7 +60,7 @@ namespace Project4_Nhom3.Controllers
 				});
 				TongTien += _sanPham.GiaTien * SoLuong;
 			}
-			_session.SetString(CommonConstands.TONGTIEN_SESSION, TongTien.ToString());
+			ViewBag.TongTien = TongTien;
 			return View(List);
 		}
 
@@ -78,7 +72,7 @@ namespace Project4_Nhom3.Controllers
 			string cartJson = cookie.Substring(start + 5, cookie.IndexOf("}", start) - start - 4);
 			var cart = JObject.Parse(cartJson);
 			   
- 			int userID = Int32.Parse(System.Text.Encoding.UTF8.GetString(_session.Get(CommonConstands.USER_ID_SESSION)));
+ 			int userID = _session.GetInt32(CommonConstands.USER_ID_SESSION).Value;
 			foreach (KeyValuePair<String, JToken> item in cart)
 			{
 				int id = int.Parse(item.Key);
@@ -100,7 +94,7 @@ namespace Project4_Nhom3.Controllers
 		// GET: GioHangs/Details/5
 		public async Task<IActionResult> Details(int? id)
 		{
-			if (id == null)
+ 			if (id == null)
 			{
 				return NotFound();
 			}
