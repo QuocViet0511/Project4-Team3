@@ -72,7 +72,7 @@ namespace Project4_Nhom3.Controllers
 			string cartJson = cookie.Substring(start + 5, cookie.IndexOf("}", start) - start - 4);
 			var cart = JObject.Parse(cartJson);
 			   
- 			int userID = _session.GetInt32(CommonConstands.USER_ID_SESSION).Value;
+ 			int userID = (int)_session.GetInt32("UserId");
 			foreach (KeyValuePair<String, JToken> item in cart)
 			{
 				int id = int.Parse(item.Key);

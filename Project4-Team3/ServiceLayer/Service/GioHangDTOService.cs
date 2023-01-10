@@ -35,7 +35,7 @@ namespace ServiceLayer.Service
                             {
                                 Id = GioHang.Id,
                                 SoLuong = GioHang.SoLuong,
-                                NgayTao = Users.NgayTao,
+                                NgayTao = GioHang.NgayTao,
                                 TongTien = GioHang.TongTien,
 								sanPham = SanPham,
                                 user = Users
