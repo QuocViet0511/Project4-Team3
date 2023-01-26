@@ -107,5 +107,25 @@ namespace Project4_Nhom3.Controllers
             return Redirect("~/");
         }
 
+        public ActionResult Infor()
+        {
+            UserVM userVM = new UserVM();
+            var user = _userService.GetUserByName(_session.GetString(CommonConstands.USER_SESSION));
+            if (user != null)
+            {
+                userVM.UserName = user.UserName;
+                userVM.Email = user.Email;
+                userVM.Phone = user.Phone;
+                userVM.Password = user.Password;
+                userVM.Avatar = user.Avatar;
+                userVM.Id = user.Id;
+            }
+            else
+            {
+                return Redirect("~/");
+            }
+            return View(userVM);
+        }
+
     }
 }
