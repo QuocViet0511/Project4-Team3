@@ -7,66 +7,184 @@
 
 <section>
     <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
+        @*new*@
+        <div class="col-md-12 col-sm-12 col-sx-12 sub frm_box_product_details">
+            <div class="col-md-5 col-sm-5 col-sx-12 sub frm_box_product_images">
                 <img class="card-img-top" src="~/images/anhsanpham/@Url.Content(Model.Image)" alt="Card image" style=" width: 100%; height:200px ">
             </div>
-            <div class="col-sm-3">
-                <div id="cards" class="card-deck">
-                    <h4 class="card-title">@Model.TenSanPham</h4>
-                    <div class="card-body">
-                        <p class="card-text">
-                            @if (@Model.listKeySP.Where(x => x.Id == Model.KeySPId).FirstOrDefault().TrangThaiKey == true)
-                            {
-                            <p> Tình Trạng: Còn hàng </p>
-                        }
-                        else
-                        {<p> Tình Trạng: Hết hàng </p>}</p>
-                            <p class="card-text">Thể Loại : @Model.TenDanhMucSanPham</p>
-                            <p class="card-text">Giá tiền : @Model.GiaTien VND</p>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <form asp-action="MuaNgay" asp-route-id="@Model.Id">
-                                        <div class="ta gc Ge">
-                                            <div id="Tb">
-                                                <button type="submit" class="db b c ta Ee mc jc">
-                                                    <svg class="od Cb Da" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="width:100%">
-                                                        <path d="M0 432c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V256H0v176zm192-68c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H204c-6.6 0-12-5.4-12-12v-40zm-128 0c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM576 80v48H0V80c0-26.5 21.5-48 48-48h480c26.5 0 48 21.5 48 48z"></path>
-                                                    </svg>
-                                                    <div>Mua ngay</div>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-sm-6">
-                                    <form asp-action="ThemGioHang">
-                                        <div id="Tb">
-                                            <button type="submit" class="db b d ta Ee mc jc">
-                                                <svg class="od Cb Da" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="width:100%">
-                                                    <path d="M551.991 64H144.28l-8.726-44.608C133.35 8.128 123.478 0 112 0H12C5.373 0 0 5.373 0 12v24c0 6.627 5.373 12 12 12h80.24l69.594 355.701C150.796 415.201 144 430.802 144 448c0 35.346 28.654 64 64 64s64-28.654 64-64a63.681 63.681 0 0 0-8.583-32h145.167a63.681 63.681 0 0 0-8.583 32c0 35.346 28.654 64 64 64s64-28.654 64-64c0-18.136-7.556-34.496-19.676-46.142l1.035-4.757c3.254-14.96-8.142-29.101-23.452-29.101H203.76l-9.39-48h312.405c11.29 0 21.054-7.869 23.452-18.902l45.216-208C578.695 78.139 567.299 64 551.991 64zM464 424c13.234 0 24 10.766 24 24s-10.766 24-24 24-24-10.766-24-24 10.766-24 24-24zm-256 0c13.234 0 24 10.766 24 24s-10.766 24-24 24-24-10.766-24-24 10.766-24 24-24zm279.438-152H184.98l-31.31-160h368.548l-34.78 160zM272 200v-16c0-6.627 5.373-12 12-12h32v-32c0-6.627 5.373-12 12-12h16c6.627 0 12 5.373 12 12v32h32c6.627 0 12 5.373 12 12v16c0 6.627-5.373 12-12 12h-32v32c0 6.627-5.373 12-12 12h-16c-6.627 0-12-5.373-12-12v-32h-32c-6.627 0-12-5.373-12-12z"></path>
-                                                </svg>
-                                                <div>Thêm vào giỏ</div>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
+            <div class="col-md-7 col-sm-7 col-sx-12 sub frm_box_product_des">
+                <ul class="list-unstyled description">
+                    <li><b>Thể loại:</b> <span class="font_root_id">@Model.TenDanhMucSanPham</span></li>
+                    <li><b>Mã sản phẩm:</b> <span class="font_root_id">@Model.RollNo</span></li>
+                    <li>
+                        <b>Tình trạng:</b> <span class="quantity_1">
+                            <p class="card-text">
+                                @if (@Model.listKeySP.Where(x => x.Id == Model.KeySPId).FirstOrDefault().TrangThaiKey == true)
+                                {
+                                <p style="color:lawngreen;font-weight:bold"> Còn hàng </p>
+                            }
+                            else
+                            {<p style="color:red;font-weight:bold"> Hết hàng </p>}</p>
+                            </span>
+                        </li>
+                    </ul>
+                    @if (Model.giamGia.TrangThai)
+                    {
+                        <ul id="price-box">
+                            <li class="price">
+                                <span class="real">@Model.GiaThayDoi VND</span>
+                                <span class="price-old">@Model.GiaTien VND</span>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul id="price-box">
+                            <li class="price">
+                                <span class="real">@Model.GiaTien VND</span>
+
+                            </li>
+                        </ul>
+                    }
+
+                    <div class="promotion-request info">
+                        <form method="post">
+                            <input type="hidden" name="root_id" value="900293">
+                            <div class="form-group">
+                                <label for="email" id="label_product_preorder"><i class="fa fa-bell"></i> Thông báo Giá tốt</label>
+                                <input class="form-control" type="text" name="email" id="product_preorder" placeholder="Email hoặc Phone" autocomplete="on" required="">
+                                <button class="btn btn-default" type="button" id="subcriber"><i class="fa fa-send" style="padding: 5px 0px 0px 0px;"></i> Đăng ký nhận tin</button>
                             </div>
+                            <input type="hidden" name="csrf_trumxi_web" value="ab9b17166a958a8ff87ccc524b430d6f">
+
+                        </form>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-sx-12 sub frm_box_product_des_cart">
+                        <div class="col-md-12 col-sm-12 col-xs-12 sub cta-box-description ">
+                            Mua trước @Model.TenSanPham trước để nhận được nhiều phần quà lớn
+                        </div>
+                        <div class="quantity-col1 col-md-3 col-sm-3 col-xs-12 sub">
+                            <div class="input-group bootstrap-touchspin">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default bootstrap-touchspin-down" type="button">-</button>
+                                </span>
+                                <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
+                                <input id="qty" name="qty" type="number" min="1" max="30" value="1" class="form-control" style="display: block;" required="">
+                                <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default bootstrap-touchspin-up" type="button">+</button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-12 sub cta-box ">
+                            <form asp-action="MuaNgay" asp-route-id="@Model.Id">
+                                <div class="col-md-5 col-sm-5 col-xs-12 sub cta-box-sub">
+                                    <button id="btnActionBuy" class="btn btn-default" type="submit">
+                                        <span class="text"> <i class="fa fa-shopping-cart"> </i> <span id="cart_action_order">MUA NGAY</span></span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        <div class="col-md-3 col-sm-3 col-xs-12 sub cta-box-sub">
+                            <form asp-action="ThemGioHang">
+                                <button id="btnActionBuy" class="btn btn-default btnActionBuyAdd" type="button">
+                                    <span class="text"> <i class="fa fa-cart-plus"> </i> <span id="cart_action_order">THÊM GIỎ HÀNG</span></span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <label>Quảng cáo</label>
-                </div>
-                <p>__________________________________________________________________________________________________________________________________________________________________</p>
-                <div class="row">
-                    <div>
-                        <label>Thông tin</label>
-                        <p>@Model.ThongTin</p>
+
+            </div>
+            <p>__________________________________________________________________________________________________________________________________________________________________</p>
+            <div class="col-md-12 col-sm-12 col-sx-12 sub frm_box_product_details">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#tab-description" data-toggle="tab" aria-expanded="true">Chi tiết sản phẩm</a>
+                    </li>
+                    <li>
+                        <a href="#tab-platform" data-toggle="tab" aria-expanded="false">Cấu hình</a>
+                    </li>
+                    <li>
+                        <a href="#tab-review" data-toggle="tab" aria-expanded="false">Đánh giá (<span id="root_count_viewer">0</span>)</a>
+                    </li>
+                    <li>
+                        <a href="#tab-guide" data-toggle="tab" aria-expanded="false"> Review Youtube</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab-description">
+                        <br />
+                        <article style="max-height: none; height: 400px;" data-readmore="" aria-expanded="false" id="rmjs-1">
+                            <p>
+                                <span style="font-size:18px;">
+                                    @Model.ThongTin
+                                </span>
+                            </p>
+                        </article>
+                    </div>
+                    <div class="tab-pane fade" id="tab-platform">
+                        <br />
+                        <p>
+                            <span style="font-size:18px; color:deepskyblue">
+                                MINIMUM:<br>
+                                Requires a 64-bit processor and operating system<br>
+                                OS: Windows 10 64-bit<br>
+                                Processor: Intel Core i5 6600k or AMD Ryzen 5 1600<br>
+                                Memory: 8 GB RAM<br>
+                                Graphics: NVIDIA GeForce GTX 1050 Ti or AMD Radeon RX 570<br>
+                                DirectX: Version 12<br>
+                                Network: Broadband Internet connection<br>
+                                Storage: 100 GB available space
+                            </span>
+                        </p>
+                    </div>
+                    <div class="tab-pane fade" id="tab-review">
+                        <div class="col-md-12 col-sm-12 col-sx-12 sub cproduct-review-box">
+
+                            <div class="form-group">
+                                <div class="col-md-12 col-sm-12 col-sx-12 sub ">
+                                    <label class="control-label" for="input-review"><a class="c-action-login-now" href="#" title="Đăng nhập để nhận xét" rel="dofollow">Đăng nhập</a> hoặc <a class="c-action-login-now" href="#" title="Đăng ký để nhận xét" rel="dofollow">Đăng Ký</a> để nhận xét cho sản phẩm này</label>
+                                </div>
+                            </div>
+                            <div id="root-layout-comments">
+
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 sub">
+                                <input type="hidden" id="current_page">
+                                <input type="hidden" id="show_per_page">
+                                <nav>
+                                    <ul class="pagination" id="page_navigation">
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab-guide" style="background: #fff;">
+                        <div class="col-md-12">
+                            <iframe id="video_player"
+                                    frameborder="0"
+                                    allowfullscreen="1"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    title="Games"
+                                    width="900"
+                                    height="400"
+                                    src="@Model.UrlVideo">
+                            </iframe>
+                        </div>
+                        <br />
                     </div>
                 </div>
-                <div class="row">
-                    <p>VIDEO</p>
-                </div>
+
             </div>
     </section>
+
+    <script>
+        $("input[name='qty']").TouchSpin({
+            buttondown_class: "btn btn-link",
+            buttonup_class: "btn btn-link"
+        });
+    </script>

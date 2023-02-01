@@ -45,6 +45,13 @@
             </div>
         </div>
         <div class="form-group">
+            @Html.LabelFor(model => model.UrlVideo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.UrlVideo, new { @class = "form-control", style = "height:120px" })
+                @Html.ValidationMessageFor(model => model.UrlVideo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ImageURL, new { htmlAttributes = new { @type = "file" } })
