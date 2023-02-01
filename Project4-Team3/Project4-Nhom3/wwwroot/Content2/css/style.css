@@ -3745,6 +3745,26 @@ h3.ghj {
 #Tb button {
     display: flex;
 }
-
-
+#price-box .price .real {
+    font-size: 23px;
+    font-weight: 700;
+    color: #de0f00;
+    border-radius: 0 4px 4px 0;
+    display: inline-block;
+}
+#price-box .price-old {
+    padding-left: 18px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #999;
+    text-decoration: line-through;
+    font-weight: 400;
+}
+#subcriber {
+    background: #262626;
+    border: none;
+    position: relative;
+    height: 35px;
+    color: #fff;
+}
 /*--media-quaries-end-here--*/
