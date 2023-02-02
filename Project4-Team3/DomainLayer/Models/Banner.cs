@@ -6,6 +6,6 @@ namespace DomainLayer.Models
     {
         public string UrlLink { get; set; }
         public string TieuDe { get; set; }
-        public Byte isActive { get; set; }
+        public bool isActive { get; set; }
     }
 }

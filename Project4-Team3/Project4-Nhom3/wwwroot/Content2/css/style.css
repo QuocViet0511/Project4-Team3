@@ -2157,6 +2157,18 @@ h3.ghj {
     color: #999;
 }
 
+#buttomChange a {
+    font-size: 13px;
+    padding: 10px 12px;
+    color: #fff;
+    background: #73B6E1;
+}
+
+    #buttomChange a:hover {
+        text-decoration: none;
+        background: #000;
+    }
+
 .account-right a {
     font-size: 13px;
     padding: 10px 12px;
@@ -3713,23 +3725,46 @@ h3.ghj {
     }
 }
 
-#cards{
+#cards {
     margin: 10px 10px 10px 10px;
 }
+
 #menu-bar ul {
     list-style-type: none;
     display: flex;
     justify-content: center;
 }
+
     #menu-bar ul li {
         display: list-item;
         padding: 5px 10px;
         color: white;
         margin: 0 3px;
     }
-#Tb button{
-    display:flex;
+
+#Tb button {
+    display: flex;
 }
-
-
+#price-box .price .real {
+    font-size: 23px;
+    font-weight: 700;
+    color: #de0f00;
+    border-radius: 0 4px 4px 0;
+    display: inline-block;
+}
+#price-box .price-old {
+    padding-left: 18px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #999;
+    text-decoration: line-through;
+    font-weight: 400;
+}
+#subcriber {
+    background: #262626;
+    border: none;
+    position: relative;
+    height: 35px;
+    color: #fff;
+}
 /*--media-quaries-end-here--*/

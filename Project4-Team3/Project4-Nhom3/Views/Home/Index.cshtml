@@ -6,15 +6,18 @@
 <div class="bnr" id="home">
     <div id="top" class="callbacks_container">
         <ul class="rslides" id="slider4">
-            <li>
-                <img src="~/images/0511.jpg" alt="" style="width:100%"/>
-            </li>
-            <li>
-                <img src="~/images/1113.jpg" alt=""  style="width:100%"/>
-            </li>
-            <li>
-                <img src="~/images/2244.jpg" alt=""  style="width:100%"/>
-            </li>
+            @if (Model.FirstOrDefault().listBanner != null)
+            {
+                foreach (var banner in Model.FirstOrDefault().listBanner)
+                {
+                    if (banner.isActive)
+                    {
+                        <li>
+                            <img src="~/images/banner/@Url.Content(banner.UrlLink)" alt="" style="width:100%" />
+                        </li>
+                    }
+                }
+            }
         </ul>
     </div>
     <div class="clearfix"> </div>
@@ -49,17 +52,17 @@
 
 <div class="about">
     @*<div class="danhmuc">
-            <div class="container">
-                <div id="menu-bar">
-                    <ul>
-                        <li><a href="#">Hành Động</a></li>
-                        <li><a href="#">Kinh Dị</a></li>
-                        <li><a href="#">Nhập Vai</a></li>
-                        <li><a href="#">Thể Thao</a></li>
-                        <li><a href="#">Phiêu lưu</a></li>
-                    </ul>
-                </div>
-            </div>
+        <div class="container">
+        <div id="menu-bar">
+        <ul>
+        <li><a href="#">Hành Động</a></li>
+        <li><a href="#">Kinh Dị</a></li>
+        <li><a href="#">Nhập Vai</a></li>
+        <li><a href="#">Thể Thao</a></li>
+        <li><a href="#">Phiêu lưu</a></li>
+        </ul>
+        </div>
+        </div>
         </div>*@
     <section>
         <div id="main-nav">

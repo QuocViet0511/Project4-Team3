@@ -24,9 +24,9 @@ namespace Project4_Nhom3.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public  IActionResult Index()
         {
-            var listSPVM = (from sp in _context.SanPham
+            var listSPVM =  (from sp in _context.SanPham
                             join dmsp in _context.DanhMucSanPham on sp.DanhMucSanPhamId equals dmsp.Id
                             join k in _context.KeySP on sp.KeySPId equals k.Id
                             join mgg in _context.GiamGia on sp.GiamGiaId equals mgg.Id
@@ -46,7 +46,15 @@ namespace Project4_Nhom3.Controllers
                                 listDMSP = _context.DanhMucSanPham.ToList(),
                                 listGiamGia = _context.GiamGia.ToList(),
                                 listKeySP = _context.KeySP.ToList(),
-                            }).AsEnumerable().ToList();
+                                listBanner = (from b in _context.Banner
+                                                             select new BannerVM
+                                                             {
+                                                                 Id = b.Id,
+                                                                 TieuDe = b.TieuDe,
+                                                                 UrlLink = b.UrlLink,
+                                                                 isActive = b.isActive,
+                                                             }).ToList(),
+        }).AsEnumerable().ToList();
 
 
             return View(listSPVM);
