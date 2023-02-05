@@ -50,20 +50,8 @@
 <!--End-slider-script-->
 <!--about-starts-->
 
-<div class="about">
-    @*<div class="danhmuc">
-        <div class="container">
-        <div id="menu-bar">
-        <ul>
-        <li><a href="#">Hành Động</a></li>
-        <li><a href="#">Kinh Dị</a></li>
-        <li><a href="#">Nhập Vai</a></li>
-        <li><a href="#">Thể Thao</a></li>
-        <li><a href="#">Phiêu lưu</a></li>
-        </ul>
-        </div>
-        </div>
-        </div>*@
+@*<div class="about">
+ 
     <section>
         <div id="main-nav">
             <div class="container">
@@ -145,3 +133,62 @@
     </div>
 </section>
 <!--product-end-->
+*@
+
+
+
+<link rel="stylesheet" type="text/css" href="~/Content/styles/main_styles.css">                                    <!-- New Arrivals -->
+<div class="new_arrivals">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2>New Arrivals</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col text-center">
+                <div class="new_arrivals_sorting">
+                    <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">Tất cả</li>
+                        @for (int i = 0; i < Model.FirstOrDefault().listDMSP.Count; i++)
+                        {
+                            <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".@Model.FirstOrDefault().listDMSP[i].TenDanhMuc">@Model.FirstOrDefault().listDMSP[i].TenDanhMuc</li>
+                        }
+
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="product-item @item.TenDanhMucSanPham">
+                            <div class="product product_filter">
+                                <div class="product_image">
+                                    <a href="/Product/ProDetail/@item.RollNo">
+                                        <img src="~/images/anhsanpham/@item.Image" alt="">
+                                    </a>
+
+                                </div>
+                                <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
+                                <div class="favorite favorite_left"></div>
+                                <div class="product_info">
+                                    <h6 class="product_name"><a href="/Product/ProDetail/@item.RollNo"><b>@item.TenSanPham</b></a></h6>
+                                    <div class="product_price">@string.Format("{0:#,##0}", item.GiaTien) đ</div>
+                                </div>
+                            </div>
+                            <div class="red_button add_to_cart_button"><a href="/GioHang/AddtoCart/@item.RollNo">Mua hàng</a></div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

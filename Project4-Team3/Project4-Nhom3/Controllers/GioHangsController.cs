@@ -35,33 +35,42 @@ namespace Project4_Nhom3.Controllers
 			_sanPhamService = sanPhamService;
 			_httpContextAccessor = httpContextAccessor;
 			_gioHangService = gioHangService;
+
 		}
 
-		[HttpPost]
+		[HttpGet]
 		public async Task<IActionResult> Index()
 		{
 			var List = new List<GioHangDTO>();
 			string cookie = HttpContext.Request.Headers["Cookie"].ToString();
 			int start = cookie.IndexOf("; cart={") + 2;
-			string cartJson = cookie.Substring(start + 5, cookie.IndexOf("}", start) - start - 4);
-			var cart = JObject.Parse(cartJson);
-			decimal? TongTien = 0;
-			foreach (KeyValuePair<String, JToken> item in cart)
+			if (start>=2)
 			{
-				int id = int.Parse(item.Key);
-				int SoLuong = int.Parse((string)item.Value);
-				SanPham _sanPham = _sanPhamService.GetSanPham(id);
-				List.Add(new GioHangDTO
-				{
-					SoLuong = SoLuong,
-					TongTien = _sanPham.GiaTien * SoLuong,
-					sanPham = _sanPham,
-					user = _context.Users.FirstOrDefault()
-				});
-				TongTien += _sanPham.GiaTien * SoLuong;
-			}
-			ViewBag.TongTien = TongTien;
-			return View(List);
+				string cartJson = cookie.Substring(start + 5, cookie.IndexOf("}", start) - start - 4);
+							var cart = JObject.Parse(cartJson);
+							decimal? TongTien = 0;
+							foreach (KeyValuePair<String, JToken> item in cart)
+							{
+								int id = int.Parse(item.Key);
+								int SoLuong = int.Parse((string)item.Value);
+								SanPham _sanPham = _sanPhamService.GetSanPham(id);
+								List.Add(new GioHangDTO
+								{
+									SoLuong = SoLuong,
+									TongTien = _sanPham.GiaTien * SoLuong,
+									sanPham = _sanPham,
+									user = _context.Users.FirstOrDefault()
+								});
+								TongTien += _sanPham.GiaTien * SoLuong;
+							}
+							ViewBag.TongTien = TongTien;
+                return View(List);
+            }
+			else
+			{
+                return View(null);
+            }
+			
 		}
 
 		[HttpPost]
