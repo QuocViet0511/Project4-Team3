@@ -1,0 +1,157 @@
+﻿@model DomainLayer.Models.Feedback
+@{
+    ViewData["Title"] = "Feedback";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    FEEDBACK
+    <div class="container">
+        <div id="madForm">
+            <form method="post" action="~/Home/Feedback">
+                <div class="default-form">
+                    <div class="row">
+                        <div class="crm text-field-wrapper form-group col-lg-12" index="611d19e584bb5e40f276b673" field="[object Object]">
+                            <div class="row">
+                                <div class="col-lg-12 madform-label-wrapper">
+                                    <label for="611d19e584bb5e40f276b673" class="">
+                                        <span>Họ & Tên</span><span class="required">*</span>
+                                    </label>
+                                </div>
+                                <div class="madform-field-wrapper col-lg-12">
+                                    <input type="text" name="name" placeholder="" required value="@Model.Name" class="form-control">
+                                    <small class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="crm email-field-wrapper form-group col-sm-6" index="611d19e584bb5e40f276b677" field="[object Object]">
+                            <div class="row">
+                                <div class="col-lg-12 madform-label-wrapper">
+                                    <label for="611d19e584bb5e40f276b677" class="">
+                                        <span>Email</span><span class="required">*</span>
+                                    </label>
+                                </div>
+                                <div class="madform-field-wrapper col-lg-12">
+                                    <input type="email" name="email" placeholder="" required value="@Model.Email" class="form-control">
+                                    <small class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="crm phone-number-field-wrapper form-group col-sm-6" index="611d19e584bb5e40f276b67b" field="[object Object]">
+                            <div class="row">
+                                <div class="col-lg-12 madform-label-wrapper">
+                                    <label for="611d19e584bb5e40f276b67b" class="">
+                                        <span>SĐT</span>
+                                    </label>
+                                </div>
+                                <div class="madform-field-wrapper col-lg-12">
+                                    <input type="tel" name="phone" placeholder="" required value="@Model.Phone" class="form-control">
+                                    <small class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="crm phone-number-field-wrapper form-group col-sm-6" index="611d19e584bb5e40f276b67b" field="[object Object]">
+                            <div class="row">
+                                <div class="col-lg-12 madform-label-wrapper">
+                                    <label for="611d19e584bb5e40f276b67b" class="">
+                                        <span>Tiêu đề</span>
+                                    </label>
+                                </div>
+                                <div class="madform-field-wrapper col-lg-12">
+                                    <input type="tel" name="tieude" placeholder="" required value="@Model.TieuDe" class="form-control">
+                                    <small class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="crm text-area-field-wrapper form-group col-lg-12" field="[object Object]">
+                            <div class="row">
+                                <div class="col-lg-12 madform-label-wrapper">
+                                    <label>
+                                        <span>Chúng tôi có thể giúp gì cho bạn ?</span>
+                                    </label>
+                                </div>
+                                <div class="madform-field-wrapper col-lg-12">
+                                    <textarea rows="3" placeholder="" required value="@Model.NoiDung" class="form-control" data-gramm="false" wt-ignore-input="true"></textarea>
+                                    <small class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="crm select-field-wrapper form-group col-lg-12" index="6123e938dfb8ff39112006e8" field="[object Object]">
+                            <div class="row">
+                                <div class="col-lg-12 madform-label-wrapper">
+                                    <label for="6123e938dfb8ff39112006e8" class="">
+                                        <span>Đánh giá sao</span>
+                                        <span class="required">*</span>
+                                    </label>
+                                </div>
+                                <div class="madform-field-wrapper col-lg-12">
+                                    <div id='ratingWrapper' value ="@Model.Rating"></div>
+
+  
+                                    <br>
+                                </div>
+
+                                <asp:HiddenField ID="hdfRatingValue" runat="server" />
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary madform-submit"><span>Submit</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    window.addEventListener('load', (rating) => {
+        const svg = '<svg class="star" id="placeholder" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24" fill="#353535" width="18px" height="18px"><g><rect fill="none" height="24" width="24"/><path d="M14.43,10l-1.47-4.84c-0.29-0.95-1.63-0.95-1.91,0L9.57,10H5.12c-0.97,0-1.37,1.25-0.58,1.81l3.64,2.6l-1.43,4.61 c-0.29,0.93,0.79,1.68,1.56,1.09L12,17.31l3.69,2.81c0.77,0.59,1.85-0.16,1.56-1.09l-1.43-4.61l3.64-2.6 c0.79-0.57,0.39-1.81-0.58-1.81H14.43z"/></g></svg>'
+        const parent = document.getElementById('ratingWrapper');
+        const starAmount = 5;
+        let selectedRating = 0;
+
+        for (let i = 0; i < starAmount; i++) {
+            parent.innerHTML += svg.replace('placeholder', `star${i + 1}`);
+        }
+
+        for (const star of parent.children) {
+            const id = star.id.replace('star', '');
+
+            star.addEventListener('mouseover', () => {
+                for (let i = 0; i < id; i++) {
+                    parent.children[i].style.fill = '#ffe88c';
+                }
+            });
+
+            star.addEventListener('mouseout', () => {
+                for (const str of parent.children) {
+                    if (!str.isClicked) {
+                        str.style.fill = '#353535';
+                    }
+                }
+            });
+
+            star.addEventListener('click', () => {
+                if (selectedRating === id) {
+                    for (const str of parent.children) {
+                        str.style.fill = '#353535';
+                        str.isClicked = false;
+                    }
+
+                    selectedRating = 0;
+                } else {
+                    for (let i = 0; i < id; i++) {
+                        parent.children[i].isClicked = true;
+                    }
+
+                    for (let i = id; i < parent.children.length; i++) {
+                        parent.children[i].style.fill = '#353535';
+                        parent.children[i].isClicked = false;
+                    }
+
+                    selectedRating = id;
+                    console.log(`your rating: ${id}/${starAmount}`);
+                    rating = id;
+                }
+            });
+        }
+    });
+</script>
