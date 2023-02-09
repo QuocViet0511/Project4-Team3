@@ -82,6 +82,7 @@ window.addEventListener('load', () => {
 
                 selectedRating = id;
                 console.log(`your rating: ${id}/${starAmount}`);
+                document.getElementById('rating').innerText = selectedRating;
             }
         });
     }
