@@ -5,8 +5,12 @@
 }
 
 <div class="container">
-    <font style="text-align:center">FEEDBACK</font>
+
     <div class="container">
+        <div >
+            <img src="~/images/feedback/Web_Photo_Editor.png" alt="" style="width:100%" />
+        </div>
+        <br />
         <div id="madForm">
             <form method="post" action="~/Home/Feedback">
                 <div class="default-form">
@@ -45,7 +49,7 @@
                                     </label>
                                 </div>
                                 <div class="madform-field-wrapper col-lg-12">
-                                    <input type="tel" name="phone" placeholder="" required value="@Model.Phone" class="form-control">
+                                    <input type="number" name="phone" placeholder="" required value="@Model.Phone" class="form-control" >
                                     <small class="form-text text-muted"></small>
                                 </div>
                             </div>
@@ -71,7 +75,6 @@
                                     </label>
                                 </div>
                                 <div class="madform-field-wrapper col-lg-12">
-                                    @*<textarea rows="3" placeholder="" value="@Model.NoiDung" class="form-control" data-gramm="false" wt-ignore-input="true"></textarea>*@
                                     @Html.TextAreaFor(model => model.NoiDung, new { @class = "form-control", style = "height:120px" })
                                     <small class="form-text text-muted"></small>
                                 </div>
@@ -87,13 +90,9 @@
                                 </div>
                                 <div class="madform-field-wrapper col-lg-12">
                                     <div id='ratingWrapper'></div>
-                                    <label id='rating' value="@Model.Rating">@Model.Rating</label>
-                                    @*<label id='rating' value ="@Model.test">@Model.test</label>
-        @Html.TextBoxFor(model => model.test, new { id = "rating" })*@
+                                    @*<label id='rating' value="@Model.Rating" ></label>*@
                                     <br>
                                 </div>
-
-                                <asp:HiddenField ID="hdfRatingValue" runat="server" />
                             </div>
                         </div>
                     </div>

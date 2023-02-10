@@ -16,7 +16,7 @@ namespace Project4_Nhom3.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ISanPhamService _sanPhamService;
-        private readonly IDanhMucSanPhamService _danhMucSanPhamService;
+        private readonly IFeedbackService _feedbackService;
         private readonly DataDbContext _context;
 
         public HomeController(ILogger<HomeController> logger, DataDbContext context)
@@ -79,9 +79,16 @@ namespace Project4_Nhom3.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Feedback(Feedback feedback)
+        public async Task<IActionResult> Feedback(Feedback feedback)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                feedback.NgayTao = DateTime.Now;
+                _context.Add(feedback);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(feedback);
 
         }   
     }

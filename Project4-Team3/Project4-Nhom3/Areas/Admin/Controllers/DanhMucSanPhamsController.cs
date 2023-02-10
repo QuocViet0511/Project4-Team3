@@ -27,7 +27,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/DanhMucSanPhams/Details/5
-        [Route("Detail/{id}")]
+        [Route("Admin/DanhMucSanPhams/Detail/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -52,11 +52,9 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // POST: Admin/DanhMucSanPhams/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TenDanhMuc,ThongTin,NgayTao,NgaySua,Id")] DanhMucSanPham danhMucSanPham)
+        public async Task<IActionResult> Create(DanhMucSanPham danhMucSanPham)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +66,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/DanhMucSanPhams/Edit/5
-        [Route("Edit/{id}")]
+        [Route("Admin/DanhMucSanPhams/Edit/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,11 +83,9 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // POST: Admin/DanhMucSanPhams/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TenDanhMuc,ThongTin,NgayTao,NgaySua,Id")] DanhMucSanPham danhMucSanPham)
+        public async Task<IActionResult> Edit(int id, DanhMucSanPham danhMucSanPham)
         {
             if (id != danhMucSanPham.Id)
             {
@@ -120,7 +116,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // GET: Admin/DanhMucSanPhams/Delete/5
-        [Route("Delete/{id}")]
+        [Route("Admin/DanhMucSanPhams/Delete/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,7 +135,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         }
 
         // POST: Admin/DanhMucSanPhams/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Admin/DanhMucSanPhams/Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
