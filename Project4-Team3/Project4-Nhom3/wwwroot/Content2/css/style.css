@@ -3767,4 +3767,150 @@ h3.ghj {
     height: 35px;
     color: #fff;
 }
+
+
+.clear {
+    padding: 0.5em 0.8em;
+    border: none;
+    border-radius: 10%;
+    background-color: rgb(228, 12, 12);
+    color: white;
+    opacity: 0.8;
+}
+
+    .clear:hover {
+        cursor: pointer;
+        opacity: 1;
+    }
+
+
+/* Clear button CSS */
+
+.align {
+    text-align: center;
+}
+
+span {
+    display: inline-block;
+}
+
+
+/* SlideBar CSS */
+
+.slidecontainer {
+    width: 20%;
+    min-width: 200px;
+    margin: 2% auto;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+    .slider:hover {
+        opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: orange;
+        cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: orange;
+        cursor: pointer;
+    }
+
+
+/* SlideBar CSS */
+
+
+/* Stars CSS */
+
+.checked {
+    color: orange;
+}
+
+.span:hover {
+    cursor: pointer;
+}
+
+
 /*--media-quaries-end-here--*/
+a:link, a:visited, a:active {
+    color: black;
+}
+
+svg {
+    width: 5vw;
+    height: 5vw;
+    cursor: pointer;
+}
+
+#nut_dropdown {
+    background-color: #0080ff;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+#noidung_dropdown {
+    
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    
+    #noidung_dropdown a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+        
+        #noidung_dropdown a:hover {
+            background-color: #ddd;
+        }
+
+.dropdown:hover #noidung_dropdown {
+    display: block;
+}
+
+
+.dropdown:hover #nut_dropdown {
+    background-color: #00bfff;
+}
+
+
+.hienThi {
+    display: block;
+}
