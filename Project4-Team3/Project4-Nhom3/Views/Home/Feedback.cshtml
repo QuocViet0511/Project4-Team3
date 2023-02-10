@@ -1,0 +1,104 @@
+﻿@model DomainLayer.Models.Feedback
+@{
+    ViewData["Title"] = "Feedback";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="container">
+        <div >
+            <img src="~/images/feedback/Web_Photo_Editor.png" alt="" style="width:100%" />
+        </div>
+        <br />
+        <div id="madForm">
+            <form method="post" action="~/Home/Feedback">
+                <div class="default-form">
+                    <div class="row">
+                        <div class="crm text-field-wrapper form-group col-lg-12" index="611d19e584bb5e40f276b673" field="[object Object]">
+                            <div class="row">
+                                <div class="col-lg-12 madform-label-wrapper">
+                                    <label for="611d19e584bb5e40f276b673" class="">
+                                        <span>Họ & Tên</span><span class="required">*</span>
+                                    </label>
+                                </div>
+                                <div class="madform-field-wrapper col-lg-12">
+                                    <input type="text" name="name" placeholder="" required value="@Model.Name" class="form-control">
+                                    <small class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="crm email-field-wrapper form-group col-sm-6" index="611d19e584bb5e40f276b677" field="[object Object]">
+                            <div class="row">
+                                <div class="col-lg-12 madform-label-wrapper">
+                                    <label for="611d19e584bb5e40f276b677" class="">
+                                        <span>Email</span><span class="required">*</span>
+                                    </label>
+                                </div>
+                                <div class="madform-field-wrapper col-lg-12">
+                                    <input type="email" name="email" placeholder="" required value="@Model.Email" class="form-control">
+                                    <small class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="crm phone-number-field-wrapper form-group col-sm-6" index="611d19e584bb5e40f276b67b" field="[object Object]">
+                            <div class="row">
+                                <div class="col-lg-12 madform-label-wrapper">
+                                    <label for="611d19e584bb5e40f276b67b" class="">
+                                        <span>SĐT</span>
+                                    </label>
+                                </div>
+                                <div class="madform-field-wrapper col-lg-12">
+                                    <input type="number" name="phone" placeholder="" required value="@Model.Phone" class="form-control" >
+                                    <small class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="crm phone-number-field-wrapper form-group col-sm-6" index="611d19e584bb5e40f276b67b" field="[object Object]">
+                            <div class="row">
+                                <div class="col-lg-12 madform-label-wrapper">
+                                    <label for="611d19e584bb5e40f276b67b" class="">
+                                        <span>Tiêu đề</span>
+                                    </label>
+                                </div>
+                                <div class="madform-field-wrapper col-lg-12">
+                                    <input type="tel" name="tieude" placeholder="" required value="@Model.TieuDe" class="form-control">
+                                    <small class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="crm text-area-field-wrapper form-group col-lg-12" field="[object Object]">
+                            <div class="row">
+                                <div class="col-lg-12 madform-label-wrapper">
+                                    <label>
+                                        <span>Chúng tôi có thể giúp gì cho bạn ?</span>
+                                    </label>
+                                </div>
+                                <div class="madform-field-wrapper col-lg-12">
+                                    @Html.TextAreaFor(model => model.NoiDung, new { @class = "form-control", style = "height:120px" })
+                                    <small class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="crm select-field-wrapper form-group col-lg-12" index="6123e938dfb8ff39112006e8" field="[object Object]">
+                            <div class="row">
+                                <div class="col-lg-12 madform-label-wrapper">
+                                    <label for="6123e938dfb8ff39112006e8" class="">
+                                        <span>Đánh giá sao</span>
+                                        <span class="required">*</span>
+                                    </label>
+                                </div>
+                                <div class="madform-field-wrapper col-lg-12">
+                                    <div id='ratingWrapper'></div>
+                                    @*<label id='rating' value="@Model.Rating" ></label>*@
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary madform-submit"><span>Submit</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
