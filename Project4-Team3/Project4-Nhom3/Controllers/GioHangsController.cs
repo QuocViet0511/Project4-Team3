@@ -38,7 +38,7 @@ namespace Project4_Nhom3.Controllers
 
 		}
 
-		[HttpGet]
+		[HttpPost]
 		public async Task<IActionResult> Index()
 		{
 			var List = new List<GioHangDTO>();
