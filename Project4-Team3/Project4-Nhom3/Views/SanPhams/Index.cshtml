@@ -52,7 +52,7 @@
                     }
 
                     <div class="promotion-request info">
-                        <form method="post">
+                        <form method="get">
                             <input type="hidden" name="root_id" value="900293">
                             <div class="form-group">
                                 <label for="email" id="label_product_preorder"><i class="fa fa-bell"></i> Thông báo Giá tốt</label>
@@ -82,9 +82,9 @@
                         </div>
 
                         <div class="col-md-3 col-sm-3 col-xs-12 sub cta-box ">
-                            <form asp-action="MuaNgay" asp-route-id="@Model.Id">
+                            <form action="~/GioHangs" method="post">
                                 <div class="col-md-5 col-sm-5 col-xs-12 sub cta-box-sub">
-                                    <button id="btnActionBuy" class="btn btn-default" type="submit">
+                                <button id="btnActionBuy" class="btn btn-default" type="submit" onclick="AddCart(@Model.Id)">
                                         <span class="text"> <i class="fa fa-shopping-cart"> </i> <span id="cart_action_order">MUA NGAY</span></span>
                                     </button>
                                 </div>
@@ -93,11 +93,11 @@
 
 
                         <div class="col-md-3 col-sm-3 col-xs-12 sub cta-box-sub">
-                            <form asp-action="ThemGioHang">
-                                <button id="btnActionBuy" class="btn btn-default btnActionBuyAdd" type="button">
+                            @*<form asp-action="ThemGioHang">*@
+                            <button id="btnActionBuy" class="btn btn-default btnActionBuyAdd" type="button" onclick="AddCart(@Model.Id)">
                                     <span class="text"> <i class="fa fa-cart-plus"> </i> <span id="cart_action_order">THÊM GIỎ HÀNG</span></span>
-                                </button>
-                            </form>
+                            </button>
+                            @*</form>*@
                         </div>
                     </div>
                 </div>

@@ -30,7 +30,7 @@ namespace Project4_Nhom3.Areas.Admin.Controllers
         [Route("Admin/GioHangs")]
         public async Task<IActionResult> Index()
         {
-            return View(_gioHangDTOService.GetAll());
+            return View(_gioHangDTOService.GetAll().OrderBy(x=>x.NgayTao));
         }
 
         // GET: Admin/GioHangs/Details/5

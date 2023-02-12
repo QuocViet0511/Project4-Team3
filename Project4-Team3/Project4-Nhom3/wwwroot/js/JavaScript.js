@@ -1,4 +1,10 @@
-﻿function AddCart(id) {
+﻿function cleanCart() {
+    console.log("da xoa cart");
+    //setCookie("cart", "", 0);
+    DeleteCookie("cart");
+}
+
+function AddCart(id) {
     var cart = {};
     var cartJson = getCookie("cart");
     if (cartJson == "") {
@@ -45,4 +51,8 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function DeleteCookie(name) {
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }

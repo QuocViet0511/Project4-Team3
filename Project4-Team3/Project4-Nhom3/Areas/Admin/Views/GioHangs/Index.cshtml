@@ -1,78 +1,82 @@
 ﻿@model IEnumerable<DomainLayer.DTO.GioHangDTO>
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 <link href="~/Content/Data/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 <div id="content">
- 
-    <div class="container-fluid">
 
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h4 class="m-0 font-weight-bold text-primary">Danh sách Giỏ hàng</h4>
-@*                <a class="float-lg-right btn btn-primary" href="/Admin/GioHangs/Create">Thêm mới Giỏ hàng</a>
-*@
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr style="Background: #456bd9">
-                                <th style="color:white">
-                                    Sản Phẩm
-                                </th>
-                                <th style="color:white">
-                                    User
-                                </th>
-                                <th style="color:white">
-                                    Số lượng
-                                </th>
-                                <th style="color:white">
-                                    Tổng tiền
-                                </th>
-                                <th style="color:white">
-                                    Ngày Tạo
-                                </th>
-                                @*<th style="color:white">Tuỳ chọn</th>*@
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td class="col-sm-3" style="text-align : center">
-                                            <img src="~/images/anhsanpham/@item.sanPham.Image" height="80px">
-                                        <div>@item.sanPham.TenSanPham</div>
-                                    </td>
-                                        <td class="col-sm-3">
-                                        @item.user.UserName
-                                    </td>
-                                        <td class="col-sm-2">
-                                        @item.SoLuong
-                                    </td>
-                                    <td class="col-sm-2">
-                                        @item.TongTien
-                                    </td>
-                                    <td class="col-sm-3">
+	<div class="container-fluid">
+
+		<!-- DataTales Example -->
+		<div class="card shadow mb-4">
+			<div class="card-header py-3">
+				<h4 class="m-0 font-weight-bold text-primary">Danh sách Giỏ hàng</h4>
+				@*                <a class="float-lg-right btn btn-primary" href="/Admin/GioHangs/Create">Thêm mới Giỏ hàng</a>
+				*@
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+						<thead>
+							<tr style="Background: #456bd9">
+								<th style="color:white">
+									Sản Phẩm
+								</th>
+								<th style="color:white">
+									User
+								</th>
+								<th style="color:white">
+									Số lượng
+								</th>
+								<th style="color:white">
+									Tổng tiền
+								</th>
+								<th style="color:white">
+									Ngày Tạo
+								</th>
+								@*<th style="color:white">Tuỳ chọn</th>*@
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model)
+							{
+								<tr>
+									<td class="col-sm-3" style="text-align : center">
+										<img src="~/images/anhsanpham/@item.sanPham.Image" height="80px">
+										<div>@item.sanPham.TenSanPham</div>
+									</td>
+									<td class="col-sm-3">
+										@item.user.UserName
+									</td>
+									<td class="col-sm-2">
+										@item.SoLuong
+									</td>
+									<td class="col-sm-2">
+										@item.TongTien
+									</td>
+									<td class="col-sm-3">
 										<div class="date-format">@item.NgayTao</div>
-                                    </td>
-                                    @*<td style="text-align : center" class="col-sm-2">
-                                        @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
-                                        @Html.ActionLink("Xoá", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
-                                    </td>*@
-                                </tr>
-                            }
+									</td>
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <script src="~/js/site.js"></script>
-    </div>
-    <!-- /.container-fluid -->
+								</tr>
+							}
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script>
+			var list = document.getElementsByClassName("date-format");
+
+			for (let i = 0; i < list.length; i++) {
+				var item = list[i].innerHTML;
+				list[i].innerHTML = item.substring(0, item.lastIndexOf("/") + 14);
+			}
+		</script>
+	</div>
+	<!-- /.container-fluid -->
 </div>
