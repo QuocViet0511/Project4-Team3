@@ -31,6 +31,7 @@
     <!--dropdown-->
     <script src="~/Scripts/js/jquery.easydropdown.js"></script>
     <link href="~/Content2/Custom.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
 </head>
 <body>
     <!--top-header-->
@@ -110,11 +111,19 @@
                             <li class="grid">
                                 <a href="~/">Sản phẩm</a>
                             </li>
-                            <li class="grid">
+                             <li class="grid">
                                 <a href="~/">Thể loại</a>
                             </li>
+                            @*<li class="dropdown">
+                                <a href="~/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Thể loại</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li> <a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                </ul>
+                            </li>*@
                             <li class="grid">
-                                <a href="~/">FeedBack</a>
+                                <a href="~/Home/Feedback">FeedBack</a>
                             </li>
                             <li class="grid">
                                 <a href="~/">Liên hệ</a>
@@ -137,7 +146,7 @@
     </div>
 
     @RenderBody()
-
+    <br />
     <!--information-starts-->
     <div class="information">
         <div class="container">
